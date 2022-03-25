@@ -28,6 +28,22 @@ def f3(j, voronoi_area_list, distance_list):
 class TestOp_py(unittest.TestCase):
 
     def test_spherical_order_parameter(self):
+        coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
+        neighbor_list = [[1, 2], [0, 2], [0, 1]]
+        nei_area = [[1, 1], [1, 1], [1, 1]]
+        box_length = [5 for i in range(3)]
+        q_condition = {'ave_times': 1, 'oi_oj': [0], 'o_factor': [
+            0], 'b_in_Q': 1, 'l_in_Q': [4], 'p_in_Q': [0], 'function_in_Q2': [f1]}
+        thread_num = 1
+
+        expected = {'l=4_f1=f1_a=0_b=0': [0.12497095917262, 0.04371722396515, 0.04371722396515],
+                    'l=4_f1=f1_a=0_b=1': [0.12208942391243, 0.12208942391243, 0.12208942391243],
+                    'l=4_f1=f1_a=1_b=0': [0.07080180236764, 0.07080180236764, 0.07080180236764],
+                    'l=4_f1=f1_a=1_b=1': [0.12208942391243, 0.12208942391243, 0.12208942391243]}
+
+        actual = op_tools.op_qw2_spherical.w_order_parameter(
+            coord, box_length, q_condition, neighbor_list, nei_area, thread_num)
+        self.assertEqual(expected, actual)
         # hcp crystal structure
         coord = [
             [0.0, 0.0, 0.0],

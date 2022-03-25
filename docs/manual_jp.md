@@ -204,7 +204,7 @@ $$ D^{(a=0,f_{ij},f_{ik},f_{jk})}_i = \frac{1}{N(N-1)/2} \sum_{j > k \in N_b(i)}
 変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストである。
 関数$f_{ij}(r_{ij}), f_{ik}(r_{ik}), f_{jk}(r_{jk})$は、距離を引数とし、返り値として持つ何かの関数である。
 変数$r_{ij},r_{ik},r_{jk}$は、それぞれベクトル${\boldsymbol r}_{ij} ,{\boldsymbol r}^{(o_i,o_k)}(i,k) ,{\boldsymbol r}^{(o_j,o_k)}(j,k)$の距離である。
-また、距離は、$ r_{ij} \le r_{ik}$ を満たす。
+また、距離は、$ r_{ij} <= r_{ik}$ を満たす。
 
 隣接粒子数12、隣接半径2.0でのオーダーパラメータの計算条件として以下の例を示す。
 尚、下記の例は、関数$\{f_{ij}(r), f_{ik}(r), f_{jk}(r) \} = r$の設定での例である。
@@ -237,7 +237,7 @@ f_{2}( r_{ik} ) cos(l\theta_{jik}) $$
 関数$f^1(r), f^2(r)$は、距離を引数として値を返り値として持つ何かの関数である。
 変数$l$は、角度の係数である。
 変数$\theta_{jik}$はベクトル${\boldsymbol r}_{ij}$とベクトル${\boldsymbol r}_{ik}$との角度である。
-距離は、$r_{ij} \le r_{ik}$ を満たす。
+距離は、$r_{ij} <= r_{ik}$ を満たす。
 
 隣接粒子数12、隣接半径2.0でのオーダーパラメータの計算条件として以下の例を示す。
 尚、下記の例は、関数$\{f_{ij}(r), f_{ik}(r) \} = r$の設定での例である。
@@ -259,7 +259,7 @@ op_settings = {
 
 angle histogram analysis $H$は次の式で計算される。
 
-$$ h^{(b=1, bin)}(i) = \frac{1}{N(N-1)/2} \sum_{j>k \in N_b(i)} histogram^{(bin)}(\theta_{jik} ) $$
+$$ h^{(b=0, bin)}(i) = \frac{1}{N(N-1)/2} \sum_{j>k \in N_b(i)} histogram^{(bin)}(\theta_{jik} ) $$
 $$ h^{(b, bin)}(i)  = \frac{1}{N+1}\sum_{j \in \tilde{N}_b(i)}h^{(b-1, bin)}(j) $$
 $$ H^{(a=0, b, bin, \nu)}(i) = FFT_{ amplitude }( h^{(b, bin)}(i)) \delta(X - \nu) $$
 
