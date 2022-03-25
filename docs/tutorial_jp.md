@@ -61,8 +61,6 @@ plt.show()
 op_setting = {
     'neighbor': [4],
     'ave_times': 0,
-    'oi_oj': [0],
-    'o_factor': [0.00],
     'm_in_A' : [2],
     'types_in_A' : ['N'],
     'analysis_type': ['A'] }
@@ -90,7 +88,7 @@ for i, v in order_parameter.items():
 ```
 などとすれば中身が表示されます。
 ```
-{'A_N4_a=0_type=N_m=2_of=0.0_oi=0_oj=0_ok=0': [0.0, 0.0, 0.0, 0.0, 0.0, .... ]}
+{'A_N4_a=0_type=N_m=2': [0.0, 0.0, 0.0, 0.0, 0.0, .... ]}
 ```
 と表示されていれば解析は成功です。
 戻り値として、dict型のデータが戻ってきており、キーとしてオーダーパラメータの名前が、値として、オーダーパラメータのデータが得られます。  
@@ -105,7 +103,7 @@ print(order_parameter)
 ```
 とすれば、以下の結果が返ってくるはずです。
 ```
-{'A_N4_a=0_type=N_m=2_of=0.0_oi=0_oj=0_ok=0': [0.15999999999999992, .... ]}
+{'A_N4_a=0_type=N_m=2': [0.15999999999999992, .... ]}
 ```
 最初の粒子の位置を少し動かしたため、最初の値が少し変化しているのがわかります。
 それでは、より大きく位置を変化させて見ましょう。
@@ -122,7 +120,7 @@ order_parameter = op_tools.op_analyze(coord, direct, sim_box, op_setting, 1)
 ```python
 colormap = plt.get_cmap("bwr")
 import matplotlib.colors
-op = order_parameter['A_N4_a=0_type=N_m=2_of=0.0_oi=0_oj=0_ok=0']
+op = order_parameter['A_N4_a=0_type=N_m=2']
 norm = matplotlib.colors.Normalize(vmin=min(op), vmax=max(op))
 fig = plt.figure()
 ax = Axes3D(fig)
@@ -193,8 +191,6 @@ import op_tools
 op_setting = {
     'neighbor': [4],
     'ave_times': 0,
-    'oi_oj': [0],
-    'o_factor': [0.00],
     'm_in_A' : [2],
     'types_in_A' : ['N'],
     'analysis_type': ['A'] }
@@ -209,8 +205,8 @@ order_parameter_randomのデータは、まったくのランダムの系のデ�
 この2つを見分けることができるかどうかをヒストグラムを描いて確かめて見ましょう。
 ```python
 fig = plt.figure()
-grid_op = order_parameter_grid['A_N4_a=0_type=N_m=2_of=0.0_oi=0_oj=0_ok=0']
-random_op = order_parameter_random['A_N4_a=0_type=N_m=2_of=0.0_oi=0_oj=0_ok=0']
+grid_op = order_parameter_grid['A_N4_a=0_type=N_m=2']
+random_op = order_parameter_random['A_N4_a=0_type=N_m=2']
 plt.hist([grid_op, random_op], label=['grid', 'random'])
 plt.legend(loc='upper right')
 plt.show()
@@ -227,8 +223,6 @@ plt.show()
 op_setting = {
     'neighbor': [16],
     'ave_times': 2,
-    'oi_oj': [0],
-    'o_factor': [0.00],
     'm_in_A' : [2],
     'types_in_A' : ['N'],
     'analysis_type': ['A'] }
@@ -238,8 +232,8 @@ order_parameter_grid = op_tools.op_analyze(coord_grid, direct, sim_box, op_setti
 order_parameter_random = op_tools.op_analyze(coord_random, direct, sim_box, op_setting, thread_num)
 
 fig = plt.figure()
-grid_op = order_parameter_grid['A_N16_a=2_type=N_m=2_of=0.0_oi=0_oj=0_ok=0']
-random_op = order_parameter_random['A_N16_a=2_type=N_m=2_of=0.0_oi=0_oj=0_ok=0']
+grid_op = order_parameter_grid['A_N16_a=2_type=N_m=2']
+random_op = order_parameter_random['A_N16_a=2_type=N_m=2']
 plt.hist([grid_op, random_op], label=['grid', 'random'])
 plt.legend(loc='upper right')
 plt.show()
@@ -278,7 +272,6 @@ def f_2(r):
 op_settings = {
   'neighbor' : [4,6,8],
   'ave_times': 1,
-  'oi_oj'    : [0], 'o_factor' : [0],
   'op_types' : ['A','P','N'], 'm_in_A'  : [1,2],
   'm_in_B'   : [2], 'n_in_B'            : [1, 2], 'phi_in_B'         : [0],
   'function' : [f_1, f_2], 'l_in_F'     : [1],
@@ -352,16 +345,16 @@ for i in range(min(len(ranking), 10)):
 出力は以下のようになるはずです。
 
 ```
-0 F_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=0_f2=1_l=1 0.9800000000000001
-1 I_N8_a=1_of=0_oi=0_oj=0_ok=0 0.975
-2 I_N6_a=1_of=0_oi=0_oj=0_ok=0 0.96
-3 F_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=0_f2=0_l=1 0.95
-4 Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0 0.9350000000000002
-5 D_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=1_f2=0_f3=1 0.9299999999999999
-6 B_N6_a=1_m=2_phi=0_n=1_of=0_oi=0_oj=0_ok=0 0.925
-7 F_N6_a=1_of=0_oi=0_oj=0_ok=0_f1=0_f2=1_l=1 0.915
-8 D_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=1_f2=1_f3=1 0.9
-9 D_N4_a=1_of=0_oi=0_oj=0_ok=0_f1=1_f2=1_f3=0 0.885
+0 F_N8_a=1_f1=0_f2=1_l=1 0.9800000000000001
+1 I_N8_a=1_ 0.975
+2 I_N6_a=1_ 0.96
+3 F_N8_a=1_f1=0_f2=0_l=1 0.95
+4 Q_N6_l=2_a=1_b=0 0.9350000000000002
+5 D_N8_a=1_f1=1_f2=0_f3=1 0.9299999999999999
+6 B_N6_a=1_m=2_phi=0_n=1 0.925
+7 F_N6_a=1_f1=0_f2=1_l=1 0.915
+8 D_N8_a=1_f1=1_f2=1_f3=1 0.9
+9 D_N4_a=1_f1=1_f2=1_f3=0 0.885
 ```
 なかなかの性能のオーダーパラメータが見つかりましたね。
 1位が正答率98%です。
@@ -370,8 +363,8 @@ for i in range(min(len(ranking), 10)):
 ```python
 import matplotlib.pyplot as plt
 fig = plt.figure()
-grid_op = order_parameter_grid['F_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=0_f2=1_l=1']
-random_op = order_parameter_random['F_N8_a=1_of=0_oi=0_oj=0_ok=0_f1=0_f2=1_l=1']
+grid_op = order_parameter_grid['F_N8_a=1_f1=0_f2=1_l=1']
+random_op = order_parameter_random['F_N8_a=1_f1=0_f2=1_l=1']
 plt.hist([grid_op, random_op], label=['grid', 'random'])
 plt.legend(loc='upper right')
 plt.show()
@@ -412,7 +405,6 @@ coord_random = [[ 10*random(),
 op_settings = {
   'neighbor' : [4,6,8],
   'ave_times': 1,
-  'oi_oj'    : [0], 'o_factor' : [0],
   'b_in_Q'   : 1, 'l_in_Q'              : [2, 4, 6, 8, 12], 'p_in_Q' : [0],
   'analysis_type' : ['Q']}
 direct = []
@@ -460,16 +452,16 @@ for i in range(min(len(ranking), 10)):
 ```
 得られた正答率としては、
 ```python
-0 Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0 0.9350000000000002
-1 Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0 0.8550000000000001
-2 Q_N4_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0 0.845
-3 Q_N8_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0 0.8150000000000001
-4 Q_N8_l=4_a=1_b=0_of=0_oi=0_oj=0_p=0 0.8150000000000001
-5 Q_N8_l=4_a=1_b=1_of=0_oi=0_oj=0_p=0 0.8
-6 Q_N8_l=6_a=1_b=1_of=0_oi=0_oj=0_p=0 0.7749999999999999
-7 Q_N6_l=6_a=1_b=0_of=0_oi=0_oj=0_p=0 0.765
-8 Q_N4_l=6_a=1_b=0_of=0_oi=0_oj=0_p=0 0.7350000000000001
-9 Q_N4_l=6_a=1_b=1_of=0_oi=0_oj=0_p=0 0.735
+0 Q_N6_l=2_a=1_b=0 0.9350000000000002
+1 Q_N8_l=2_a=1_b=1 0.8550000000000001
+2 Q_N4_l=2_a=1_b=0 0.845
+3 Q_N8_l=2_a=1_b=0 0.8150000000000001
+4 Q_N8_l=4_a=1_b=0 0.8150000000000001
+5 Q_N8_l=4_a=1_b=1 0.8
+6 Q_N8_l=6_a=1_b=1 0.7749999999999999
+7 Q_N6_l=6_a=1_b=0 0.765
+8 Q_N4_l=6_a=1_b=0 0.7350000000000001
+9 Q_N4_l=6_a=1_b=1 0.735
 ```
 となっていて、１種類の特徴量では正答率0.935までしか上がりません。
 そこで、複数を組み合わせて使う事を考えます。
@@ -527,11 +519,11 @@ for i in range(0, 5):
 これで特徴量の数、正答率、特徴量の名前が判明しました。
 ```
 num of feat, avg_score, feature_name
-1 0.9200000000000002 ('Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0',)
-2 0.97 ('Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0')
-3 0.98 ('Q_N4_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0')
-4 0.985 ('Q_N4_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N4_l=4_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0')
-5 0.99 ('Q_N4_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N4_l=4_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N4_l=8_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0', 'Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0')
+1 0.9200000000000002 ('Q_N6_l=2_a=1_b=0',)
+2 0.97 ('Q_N6_l=2_a=1_b=0', 'Q_N8_l=2_a=1_b=1')
+3 0.98 ('Q_N4_l=2_a=1_b=0', 'Q_N6_l=2_a=1_b=0', 'Q_N8_l=2_a=1_b=1')
+4 0.985 ('Q_N4_l=2_a=1_b=0', 'Q_N4_l=4_a=1_b=0', 'Q_N6_l=2_a=1_b=0', 'Q_N8_l=2_a=1_b=1')
+5 0.99 ('Q_N4_l=2_a=1_b=0', 'Q_N4_l=4_a=1_b=0', 'Q_N4_l=8_a=1_b=0', 'Q_N6_l=2_a=1_b=0', 'Q_N8_l=2_a=1_b=1')
 ```
 どうやら$l=2$が良さそうです。次点で$l=4,8$が良さそうです。
 ついでにpairplotも描いておきましょう。
@@ -546,8 +538,8 @@ from sklearn.model_selection import train_test_split
 ```python
 import seaborn as sns
 sns.pairplot(test_d, hue="label", plot_kws={'alpha': 0.5, 's': 8},
-             vars=['Q_N6_l=2_a=1_b=0_of=0_oi=0_oj=0_p=0',
-                   'Q_N8_l=2_a=1_b=1_of=0_oi=0_oj=0_p=0'],
+             vars=['Q_N6_l=2_a=1_b=0',
+                   'Q_N8_l=2_a=1_b=1'],
              size=3.5, palette='colorblind').savefig('pairplot.png')
 ```
 これで以下の図が描けます。
@@ -580,7 +572,6 @@ coord_random = [[ 10*random(),
 op_settings = {
   'neighbor' : [6],
   'ave_times': 1,
-  'oi_oj'    : [0], 'o_factor' : [0],
   'b_in_Q'   : 1, 'l_in_Q' : [2, 4, 8], 'p_in_Q' : [0],
   'analysis_type' : ['Q']}
 direct = []
@@ -646,7 +637,6 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [6],
     'ave_times': 1,
-    'oi_oj': [0], 'o_factor': [0],
     'b_in_Q': 1, 'l_in_Q': [2, 4, 8], 'p_in_Q': [0],
     'analysis_type': ['Q']}
 direct = []
@@ -752,7 +742,6 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [6],
     'ave_times': 1,
-    'oi_oj': [0], 'o_factor': [0],
     'b_in_Q': 1, 'l_in_Q': [2, 4, 8], 'p_in_Q': [0],
     'analysis_type': ['Q']}
 direct = []
@@ -846,7 +835,6 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [4, 6, 8],
     'ave_times': 1,
-    'oi_oj': [0], 'o_factor': [0],
     'b_in_Q': 1, 'l_in_Q': [2, 4, 6, 8, 12], 'p_in_Q': [0],
     'analysis_type': ['Q', 'W']}
 direct = []
@@ -961,9 +949,9 @@ def analyze_1_feature(df):
 これで1変数の性能を調べる事ができます。
 実際に実行すると、
 ```
-0 0.58333 Q_N4_l=12_a=0_b=0_of=0_oi=0_oj=0_p=0
-1 0.51667 Q_N4_l=12_a=0_b=1_of=0_oi=0_oj=0_p=0
-2 0.68333 Q_N4_l=12_a=1_b=0_of=0_oi=0_oj=0_p=0
+0 0.58333 Q_N4_l=12_a=0_b=0
+1 0.51667 Q_N4_l=12_a=0_b=1
+2 0.68333 Q_N4_l=12_a=1_b=0
 ```
 といった感じで、各特徴量の性能と名前が出力されます。
 その後、正答率の閾値を決めて、読み込まない特徴量を決めます。
