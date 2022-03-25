@@ -611,40 +611,41 @@ op_settings = {
   
   op_settings = {  
     # 隣接粒子半径の設定
-    'neighbor'       : [8],               # 隣接粒子数
-    'radius'         : [1.5],             # 隣接半径
-    'ave_times'      : 1,                 # あるオーダーパラメータを周囲の粒子で平均を計算する回数  
+    'neighbor'       : [8],        # 隣接粒子数
+    'radius'         : [1.5],      # 隣接半径
+    'ave_times'      : 1,          # あるオーダーパラメータを周囲の粒子で平均を計算する回数  
     # A
-    'op_types' : ['A','P','N'],           # オーダーパラメータ A での解析の種類の指定
-    'm_in_A'         : [2, 4],            # 粒子i,粒子j からの距離の近い粒子jの粒子数
+    'op_types' : ['A','P','N'],    # オーダーパラメータ A での解析の種類の指定
+    'm_in_A'         : [2, 4],     # 粒子i,粒子j からの距離の近い粒子jの粒子数
     # B
-    'm_in_B' : [2],                       # 角度の係数
-    'n_in_B': [1, 2],                     # cosine関数の指数
-    'phi_in_B': [0],                      # 角度のoffset
+    'm_in_B' : [2],                # 角度の係数
+    'n_in_B': [1, 2],              # cosine関数の指数
+    'phi_in_B': [0],               # 角度のoffset
     # C
-    'types_in_C' : ['half'],              # ゆらぎを表現したベクトルを何回足すかというパラメータ
-    'modes_in_C' : ['dist'],              # ある粒子の反対にある粒子の探し方
+    'types_in_C' : ['half'],       # ゆらぎを表現したベクトルを何回足すかというパラメータ
+    'modes_in_C' : ['dist'],       # ある粒子の反対にある粒子の探し方
     # D
-    'function': [f1]                     # 関数の種類
+    'function': [f1]               # 関数の種類
     # F
-    'l_in_F' : [1],                       # 角度の係数
+    'l_in_F' : [1],                # 角度の係数
     # H
-    'b_in_H' : 1,                         # 角度のヒストグラムを平均化する回数
-    'bin_in_H' : [24],                    # ヒストグラムのビンの数
-    'nu_in_H' : [3],                      # 抜き出す角度の周波数成分。この例では pi/3 の周波数の成分の指定になっている。
+    'b_in_H' : 1,                  # 角度のヒストグラムを平均化する回数
+    'bin_in_H' : [24],             # ヒストグラムのビンの数
+    'nu_in_H' : [3],               # 抜き出す角度の周波数成分。この例では pi/3 の周波数の成分の指定になっている。
     # I
     # Q
-    'b_in_Q'         : 1,                 # 球面調和関数を平均化する回数
-    'l_in_Q'         : [2, 4, 6],         # 球面調和関数の次数を指定するパラメータl  
+    'b_in_Q'         : 1,          # 球面調和関数を平均化する回数
+    'l_in_Q'         : [2, 4, 6],  # 球面調和関数の次数を指定するパラメータl  
     # Q2 W2
-    'function_in_Q2' : [f2],              # 重み関数の指定
+    'function_in_Q2' : [f2],       # 重み関数の指定
     # LQ LW
     # S
-    'n_in_S'         : [2],               # Degree of Legendre_polynomials
+    'n_in_S'         : [2],        # Degree of Legendre_polynomials
     # T
-    'n_in_T'         : [2],               # Degree of Legendre_polynomials
-    'd_in_T': [1.0],
-    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 'Q', 'W', 'Q2', 'W2', 'LQ', 'LW', 'S', 'T']} # 解析するオーダーパラメータの種類
+    'n_in_T'         : [2],        # Degree of Legendre_polynomials
+    'd_in_T'         : [1.0],      # smectic相の層と層との間の距離
+    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 
+    'Q', 'W', 'Q2', 'W2', 'LQ', 'LW', 'S', 'T']} # 解析するオーダーパラメータの種類
 ```
 
 # 出力のフォーマット

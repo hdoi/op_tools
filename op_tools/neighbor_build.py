@@ -7,6 +7,7 @@ import sys
 import math
 import numpy as np
 from . import misc
+from . import wrapper
 
 
 class SmallRadiusError(Exception):
@@ -199,7 +200,7 @@ def build_neighbor_list(coord, box_length, condition, thread_num):
                 sys.exit(1)
 
     t_end = time.time()
-    print("# neighbor elap time ", t_end - t_start)
+    wrapper.elap_time("neighbor build", t_end - t_start)
     return [nei_list, nei_dist]
 
 

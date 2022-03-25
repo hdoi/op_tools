@@ -45,6 +45,7 @@ calc_spherical_order_parameter	op_qw_spherical.py	/^def calc_spherical_order_par
 calc_t_wrapper	op_t_msigma.py	/^def calc_t_wrapper(args):$/;"	f
 calc_theta_phi	misc.py	/^def calc_theta_phi(x_i, x_j, box_length):$/;"	f
 calc_thresh	neighbor_build.py	/^def calc_thresh(box_length, part_num, target_num, safe_factor):$/;"	f
+check_boundary_condition	neighbor_build.py	/^def check_boundary_condition(x, box_length):$/;"	f
 cnp_order_parameter	op_a_cnp.py	/^def cnp_order_parameter(coord, box_length, setting, neighbor_list, thread_num):$/;"	f
 convert_3dim_to_1dim	misc.py	/^def convert_3dim_to_1dim(array3d):$/;"	f
 convert_to_theta_phi	misc.py	/^def convert_to_theta_phi(xyz):$/;"	f
@@ -52,6 +53,7 @@ coord_to_cell_num	neighbor_build.py	/^def coord_to_cell_num(coord, cell_length):
 cpa_order_parameter	op_c_cpa.py	/^def cpa_order_parameter(coord, box_length, setting, neighbor_list, thread_num):$/;"	f
 data_num_name_to_data_name_num	misc.py	/^def data_num_name_to_data_name_num(a_dict, num_part):$/;"	f
 distance_ik_jk	misc.py	/^def distance_ik_jk(x_i, x_j, box_length, x_k):$/;"	f
+elap_time	wrapper.py	/^def elap_time(name, time):$/;"	f
 func_to_value	lib_qw.py	/^def func_to_value(l_sph, func):$/;"	f
 func_to_value_wigner	lib_qw.py	/^def func_to_value_wigner(l_sph, wigner3j, func):$/;"	f
 gen_neighbor_ij	misc.py	/^def gen_neighbor_ij(coord_1d, args):$/;"	f
@@ -67,7 +69,6 @@ onsager_order_parameter	op_s_local_onsager.py	/^def onsager_order_parameter(dire
 op_analyze	wrapper.py	/^def op_analyze(coord, direct, box_length, op_settings, thread_num):$/;"	f
 op_analyze_with_neighbor_list	wrapper.py	/^def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_settings, n_list, nei_area, op_data, thread_num):$/;"	f
 param_check	wrapper.py	/^def param_check(op_settings, idx, init_value):$/;"	f
-param_check_all	wrapper.py	/^def param_check_all(op_settings):$/;"	f
 plane_point_distance	misc.py	/^def plane_point_distance(plane_var, box_length, point):$/;"	f
 poly_area	neighbor_build.py	/^def poly_area(poly):$/;"	f
 q_to_xyz	misc.py	/^def q_to_xyz(q_list):$/;"	f

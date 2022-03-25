@@ -276,7 +276,7 @@ op_settings = {
   'm_in_B'   : [2], 'n_in_B'            : [1, 2], 'phi_in_B'         : [0],
   'function' : [f_1, f_2], 'l_in_F'     : [1],
   'b_in_H'   : 1, 'bin_in_H'            : [24], 'nu_in_H'            : [3],
-  'b_in_Q'   : 1, 'l_in_Q'              : [2, 4, 6, 8, 12], 'p_in_Q' : [0],
+  'b_in_Q'   : 1, 'l_in_Q'              : [2, 4, 6, 8, 12],
   'n_in_S'   : [2], 'n_in_T'            : [2], 'd_in_T'              : [1.0],
   'analysis_type' : ['A', 'B', 'C', 'D', 'F', 'H', 'I', 'Q', 'W', 'S', 'T']}
 direct = []
@@ -405,7 +405,7 @@ coord_random = [[ 10*random(),
 op_settings = {
   'neighbor' : [4,6,8],
   'ave_times': 1,
-  'b_in_Q'   : 1, 'l_in_Q'              : [2, 4, 6, 8, 12], 'p_in_Q' : [0],
+  'b_in_Q'   : 1, 'l_in_Q'              : [2, 4, 6, 8, 12],
   'analysis_type' : ['Q']}
 direct = []
 thread_num = 3
@@ -572,7 +572,7 @@ coord_random = [[ 10*random(),
 op_settings = {
   'neighbor' : [6],
   'ave_times': 1,
-  'b_in_Q'   : 1, 'l_in_Q' : [2, 4, 8], 'p_in_Q' : [0],
+  'b_in_Q'   : 1, 'l_in_Q' : [2, 4, 8],
   'analysis_type' : ['Q']}
 direct = []
 thread_num = 3
@@ -637,7 +637,7 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [6],
     'ave_times': 1,
-    'b_in_Q': 1, 'l_in_Q': [2, 4, 8], 'p_in_Q': [0],
+    'b_in_Q': 1, 'l_in_Q': [2, 4, 8],
     'analysis_type': ['Q']}
 direct = []
 thread_num = 3
@@ -742,7 +742,7 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [6],
     'ave_times': 1,
-    'b_in_Q': 1, 'l_in_Q': [2, 4, 8], 'p_in_Q': [0],
+    'b_in_Q': 1, 'l_in_Q': [2, 4, 8],
     'analysis_type': ['Q']}
 direct = []
 thread_num = 3
@@ -835,7 +835,7 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [4, 6, 8],
     'ave_times': 1,
-    'b_in_Q': 1, 'l_in_Q': [2, 4, 6, 8, 12], 'p_in_Q': [0],
+    'b_in_Q': 1, 'l_in_Q': [2, 4, 6, 8, 12],
     'analysis_type': ['Q', 'W']}
 direct = []
 thread_num = 3

@@ -165,7 +165,7 @@ def search_opposite_particle(coord_1d, neighbor_list_ii, x_i, i_j, x_j, box_leng
             if distance <= nearest_distnace:
                 nearest_distnace = distance
                 nearest_i_k = i_k
-    elif imode == 'angl':
+    elif imode == 'angle':
         nearest_i_k = 1000
         nearest_angle = -10000000.0
         for i_k in neighbor_list_ii:
@@ -177,7 +177,7 @@ def search_opposite_particle(coord_1d, neighbor_list_ii, x_i, i_j, x_j, box_leng
 
             if angle_jik >= nearest_angle:
                 nearest_angle = angle_jik
-                nearest_i_k = ik
+                nearest_i_k = i_k
 
     return nearest_i_k
 

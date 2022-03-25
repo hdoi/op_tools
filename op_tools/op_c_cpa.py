@@ -25,6 +25,7 @@ def calc_c_wrapper(args):
         for i_2 in range(target):
             i_j = nei_ii[i_2]
             x_j = coord_1d[3 * i_j: 3*i_j + 3]
+            # imode = dist or angle
             i_k = misc.search_opposite_particle(coord_1d, nei_ii, x_i, i_j, x_j, box_length, imode)
 
             x_k = coord_1d[3 * i_k: 3 * i_k + 3]

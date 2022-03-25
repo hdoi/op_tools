@@ -4,8 +4,12 @@ init:
 install:
 	pip3 install -e .
 
+uninstall:
+	pip3 uninstall op_tools
+
 test:
 	python3 ./setup.py test
 
-readme:
+doc:
 	pandoc README.md -o README.rst
+

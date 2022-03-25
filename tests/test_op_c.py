@@ -34,3 +34,20 @@ class TestOp_py(unittest.TestCase):
         actual = op_tools.op_c_cpa.cpa_order_parameter(
             coord, box_length, c_condition, neighbor_list, thread_num)
         self.assertEqual(expected, actual)
+
+        # mode test
+        coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]]
+        neighbor_list = [[1, 2], [0, 2], [0, 1]]
+        box_length = [5 for i in range(3)]
+        c_condition = {'ave_times': 1, 'types': ['half', 'all'], 'modes': ['angle']}
+        thread_num = 1
+
+        expected = {'a=0_type=all_mode=angle': [0.0, 18.0, 18.0],
+                    'a=1_type=all_mode=angle': [12.0, 12.0, 12.0],
+                    'a=0_type=half_mode=angle': [0.0, 9.0, 9.0],
+                    'a=1_type=half_mode=angle': [6.0, 6.0, 6.0],
+                    }
+        actual = op_tools.op_c_cpa.cpa_order_parameter(
+            coord, box_length, c_condition, neighbor_list, thread_num)
+
+        self.assertEqual(expected, actual)

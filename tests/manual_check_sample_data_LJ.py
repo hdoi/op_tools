@@ -64,8 +64,9 @@ if __name__ == '__main__':
         'radius': [1.5],
         'Delaunay': ['standard'],
         'ave_times': 1,
-        'analysis_type': ['C']
-    }
+        'types_in_C' : ['half'],
+        'modes_in_C' : ['dist'],
+        'analysis_type': ['C'] }
 
     op_data = op_tools.op_analyze(
         coord, direct, box_length, op_settings, 1)
@@ -229,8 +230,13 @@ if __name__ == '__main__':
     for i1, v1 in op_data.items():
         print(i1)
 
-    def f_1(r):
+    def f1(r):
         return r
+    
+    def f2(j, voronoi_area_list, distance_list):
+        weight = voronoi_area_list[j] / np.sum(voronoi_area_list)
+        return weight
+    
     op_settings = {
         'neighbor': [8],
         'radius': [1.5],
@@ -243,8 +249,11 @@ if __name__ == '__main__':
         'm_in_B': [2],
         'n_in_B': [1, 2],
         'phi_in_B': [0],
+        # C
+        'types_in_C' : ['half'],
+        'modes_in_C' : ['dist'],
         # D
-        'function': [f_1],
+        'function': [f1],
         # F
         'l_in_F': [1],
         # H
@@ -255,13 +264,15 @@ if __name__ == '__main__':
         # Q W
         'b_in_Q': 1,
         'l_in_Q': [2, 4, 6],
-        'p_in_Q': [0],
+        # Q2 W2
+        'function_in_Q2' : [f2],
+        # LQ LW
         # S
         'n_in_S': [2],
         # T
         'n_in_T': [2],
         'd_in_T': [1.0],
-        'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 'Q', 'W', 'S', 'T']}
+        'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 'Q', 'W', 'Q2', 'W2', 'LQ', 'LW', 'S', 'T']}
 
     op_data = op_tools.op_analyze(
         coord, direct, box_length, op_settings, 1)
