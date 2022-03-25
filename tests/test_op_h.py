@@ -11,8 +11,7 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         box_length = [5 for i in range(3)]
-        h_condition = {'ave_times': 1, 'b_in_H': 1, 'hist_num': [
-            24], 'o_factor': [1.0], 'oi_oj_ok': [0], 'nu': [3]}
+        h_condition = {'ave_times': 1, 'b_in_H': 1, 'hist_num': [24], 'nu': [3]}
         thread_num = 1
 
         expected = {
@@ -27,8 +26,7 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         neighbor_list = [[1, 2], [0], []]
         box_length = [5 for i in range(3)]
-        h_condition = {'ave_times': 1, 'b_in_H': 1, 'hist_num': [
-            24], 'o_factor': [1.0], 'oi_oj_ok': [0], 'nu': [3]}
+        h_condition = {'ave_times': 1, 'b_in_H': 1, 'hist_num': [24], 'nu': [3]}
         thread_num = 1
 
         expected = {'a=0_b=0_bin=24_nu=3': [1.0, 1.0, 1.0],

@@ -37,6 +37,7 @@ See manual and tutorial.
 # Install
 
 ```
+$ git clone https://github.com/hdoi/op_tools.git
 $ cd order_tools  
 $ pip3 install -e .  
 or 

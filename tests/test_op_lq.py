@@ -34,8 +34,7 @@ class TestOp_py(unittest.TestCase):
             2], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12]]
 
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {'l=4_a=0_b=0': [0.28912440907390397, 0.9999999999999999, 0.9999999999999999, -0.28906250000000044, -0.2890625000000001, -0.2890624999999995, -0.2890625000000001, 0.09288194444444468, 0.02343750000000022, -0.28906250000000006, 0.13965650826446324, 0.13965650826446285, -0.28906250000000006],
@@ -53,8 +52,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[], [], []]
 
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0,'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {'l=4_a=0_b=0': [0.0, 0.0, 0.0],

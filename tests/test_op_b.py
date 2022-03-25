@@ -11,8 +11,7 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         box_length = [5 for i in range(3)]
-        b_condition = {'ave_times': 1, 'm': [1], 'phi': [
-            0], 'n': [1], 'o_factor': [0], 'oi_oj_ok': [0]}
+        b_condition = {'ave_times': 1, 'm': [1], 'phi': [0], 'n': [1]}
         thread_num = 1
 
         expected = {
@@ -26,12 +25,11 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         neighbor_list = [[1, 2], [0], []]
         box_length = [5 for i in range(3)]
-        b_condition = {'ave_times': 1, 'm': [1], 'phi': [
-            0], 'n': [1], 'o_factor': [0], 'oi_oj_ok': [0]}
+        b_condition = {'ave_times': 1, 'm': [1], 'phi': [0], 'n': [1]}
         thread_num = 1
 
-        expected = {'a=0_m=1_phi=0_n=1': [6.123233995736766e-17, 0, 0], 
-        'a=1_m=1_phi=0_n=1': [2.041077998578922e-17, 3.061616997868383e-17, 0.0]}
+        expected = {'a=0_m=1_phi=0_n=1': [6.123233995736766e-17, 0, 0],
+                    'a=1_m=1_phi=0_n=1': [2.041077998578922e-17, 3.061616997868383e-17, 0.0]}
         actual = op_tools.op_b_baa.baa_order_parameter(
             coord, box_length, b_condition, neighbor_list, thread_num)
         self.assertEqual(expected, actual)

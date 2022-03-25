@@ -14,8 +14,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         direct = [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
         box_length = [5.0 for i in range(3)]
-        t_condition = {'ave_times': 1, 'oi_oj': [
-            0], 'o_factor': [1], 'd_in_T': [1.00], 'n_in_T': [2, 4]}
+        t_condition = {'ave_times': 1, 'd_in_T': [1.00], 'n_in_T': [2, 4]}
         thread_num = 1
 
         expected = {'a=0_n=2_z=1.0': [1.0, 1.0, 1.0],
@@ -33,8 +32,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[], [], []]
         direct = [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
         box_length = [5.0 for i in range(3)]
-        t_condition = {'ave_times': 1, 'oi_oj': [
-            0], 'o_factor': [1], 'd_in_T': [1.00], 'n_in_T': [2, 4]}
+        t_condition = {'ave_times': 1, 'd_in_T': [1.00], 'n_in_T': [2, 4]}
         thread_num = 1
 
         expected = {'a=0_n=2_z=1.0': [0.0, 0.0, 0.0],

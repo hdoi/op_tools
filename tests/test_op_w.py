@@ -12,8 +12,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         direct = [[1, 0, 0], [1, 0.01, 0], [1, 0, 0.1]]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 1, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 1, 'l_in_Q': [4], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 1, 'b_in_Q': 1, 'l_in_Q': [4]}
         thread_num = 1
 
         expected = {'l=4_a=0_b=0': [0.12497095917262, 0.04371722396515, 0.04371722396515],
@@ -38,8 +37,7 @@ class TestOp_py(unittest.TestCase):
 
         direct = [[1, 0, 0] for i in range(15)]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         # value in DOI:10.1103/PhysRevB.28.784
@@ -67,8 +65,7 @@ class TestOp_py(unittest.TestCase):
 
         direct = [[1, 0, 0] for i in range(13)]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {'l=4_a=0_b=0': [-0.15931737313308, 0.1340970468803, 0.19171687171168, 0.1340970468803, 0.19171687171168, -0.12223581660314, 0.1340970468803, 0.19171687171168, 0.1340970468803, -0.12223581660314, 0.19171687171168, 0.1340970468803, 0.19171687171168],
@@ -98,8 +95,7 @@ class TestOp_py(unittest.TestCase):
 
         direct = [[1, 0, 0] for i in range(13)]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {
@@ -118,8 +114,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[], [], []]
         direct = [[1, 0, 0] for i in range(3)]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {

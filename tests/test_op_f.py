@@ -15,8 +15,7 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         nei_list = [[1, 2], [0, 2], [0, 1]]
         box_length = [5.0 for i in range(3)]
-        f_condition = {'ave_times': 1, 'oi_oj_ok': [0], 'o_factor': [0],
-                       'func': [f_1], 'l_in_F': [0]}
+        f_condition = {'ave_times': 1, 'func': [f_1], 'l_in_F': [0]}
         thread_num = 1
 
         expected = {'a=0_f1=0_f2=0_l=0': [1.0, 1.0, 1.0],
@@ -29,8 +28,7 @@ class TestOp_py(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
         nei_list = [[1, 2], [0], []]
         box_length = [5.0 for i in range(3)]
-        f_condition = {'ave_times': 1, 'oi_oj_ok': [0], 'o_factor': [0],
-                       'func': [f_1], 'l_in_F': [0]}
+        f_condition = {'ave_times': 1, 'func': [f_1], 'l_in_F': [0]}
         thread_num = 1
 
         expected = {'a=0_f1=0_f2=0_l=0': [1.0, 0, 0],

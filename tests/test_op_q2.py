@@ -32,8 +32,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         nei_area = [[1, 1], [1, 1], [1, 1]]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 1, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 1, 'l_in_Q': [4], 'p_in_Q': [0], 'function_in_Q2' : [f1]}
+        q_condition = {'ave_times': 1, 'b_in_Q': 1, 'l_in_Q': [4], 'function_in_Q2' : [f1]}
         thread_num = 1
 
         expected = {'l=4_f1=f1_a=0_b=0': [0.82915619758885, 0.54486236794258, 0.54486236794258],
@@ -57,8 +56,7 @@ class TestOp_py(unittest.TestCase):
             1], [1], [1], [1], [1], [1], [1], [1]]
 
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'p_in_Q': [0], 'function_in_Q2': [f2]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6], 'function_in_Q2': [f2]}
         thread_num = 1
 
         expected = {
@@ -90,8 +88,7 @@ class TestOp_py(unittest.TestCase):
                     [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]]
 
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0, 'oi_oj': [0], 'o_factor': [
-            0], 'b_in_Q': 0, 'l_in_Q': [4, 6], 'function_in_Q2': [f1, f2, f3]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6], 'function_in_Q2': [f1, f2, f3]}
         thread_num = 1
 
         expected = {'l=4_f1=f1_a=0_b=0': [0.09722222222222, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
