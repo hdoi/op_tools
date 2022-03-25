@@ -31,7 +31,7 @@ def calc_i_wrapper(args):
             sum_cos += (math.cos(theta) + 1/3.0)**2
     op_i = 1 - (3.0/8.0)*sum_cos
 
-    name = misc.naming('c', [0])
+    name = misc.naming('i', [0])
     op_temp[name] = op_i
 
     return op_temp
@@ -56,8 +56,8 @@ def top_order_parameter(coord, box_length, setting, neighbor_list, thread_num):
 
     # neighbor histogram averaging
     for a_t in range(a_times):
-        name = misc.naming('c', [a_t+1])
-        name_old = misc.naming('c', [a_t])
+        name = misc.naming('i', [a_t+1])
+        name_old = misc.naming('i', [a_t])
         op_value[name] = misc.v_neighb_ave(
             neighbor_list, op_value[name_old])
 

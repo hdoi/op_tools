@@ -81,7 +81,7 @@ def cnp_order_parameter(coord, box_length, setting, neighbor_list, thread_num):
     comb = [(op_type, m)
             for op_type in op_types for m in m_nei]
     for a_t in range(a_times):
-        for op_type, m_nei, in comb:
+        for op_type, m_nei in comb:
             name = misc.naming(
                 'a', [a_t + 1, op_type, m_nei])
             name_old = misc.naming(

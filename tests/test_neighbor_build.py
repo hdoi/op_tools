@@ -45,6 +45,17 @@ class TestNeighborBuild(unittest.TestCase):
             box_length, part_num, target_num, safe_factor)
         self.assertEqual((expected == actual), True)
 
+    def test_periodic_boundary_condition(self):
+        box_length = 3.0
+        expected = 2.0
+        actual = op_tools.neighbor_build.check_boundary_condition(-1, box_length)
+        self.assertEqual((expected == actual), True)
+        actual = op_tools.neighbor_build.check_boundary_condition(5, box_length)
+        self.assertEqual((expected == actual), True)
+        actual = op_tools.neighbor_build.check_boundary_condition(-4, box_length)
+        self.assertEqual((expected == actual), True)
+        actual = op_tools.neighbor_build.check_boundary_condition(8, box_length)
+
     def test_build_neighbor_list(self):
         coord = [[0, 0, 0], [0.5, 0, 0]]
         box_length = [2, 2, 2]

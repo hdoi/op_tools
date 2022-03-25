@@ -149,21 +149,35 @@ def distance_ik_jk(x_i, x_j, box_length, x_k):
     return distance
 
 
-def search_opposite_j_particle(coord_1d, neighbor_list_ii, x_i, i_j, x_j, box_length):
+def search_opposite_particle(coord_1d, neighbor_list_ii, x_i, i_j, x_j, box_length, imode):
     x_i_j = calc_delta(x_j, x_i, box_length)
     x_j_opposite = [x_i[i] - x_i_j[i] for i in range(3)]
 
-    nearest_i_k = 1000
-    nearest_distnace = 10000000.0
-    for i_k in neighbor_list_ii:
-        if i_k == i_j:
-            continue
-        x_k = coord_1d[3*i_k: 3*i_k + 3]
-        x_j_o_k = calc_delta(x_k, x_j_opposite, box_length)
-        distance = np.linalg.norm(x_j_o_k)
-        if distance <= nearest_distnace:
-            nearest_distnace = distance
-            nearest_i_k = i_k
+    if imode == 'dist':
+        nearest_i_k = 1000
+        nearest_distnace = 10000000.0
+        for i_k in neighbor_list_ii:
+            if i_k == i_j:
+                continue
+            x_k = coord_1d[3*i_k: 3*i_k + 3]
+            x_j_o_k = calc_delta(x_k, x_j_opposite, box_length)
+            distance = np.linalg.norm(x_j_o_k)
+            if distance <= nearest_distnace:
+                nearest_distnace = distance
+                nearest_i_k = i_k
+    elif imode == 'angl':
+        nearest_i_k = 1000
+        nearest_angle = -10000000.0
+        for i_k in neighbor_list_ii:
+            if i_k == i_j:
+                continue
+            x_k = coord_1d[3*i_k: 3*i_k + 3]
+            x_i_k = calc_delta(x_k, x_i, box_length)
+            angle_jik = angle(x_i_j, x_i_k)
+
+            if angle_jik >= nearest_angle:
+                nearest_angle = angle_jik
+                nearest_i_k = ik
 
     return nearest_i_k
 
@@ -233,8 +247,8 @@ def naming(mode, arg):
             phi) + '_n=' + str(n_pow)
 
     if mode == 'c':
-        [a_t] = arg
-        name = 'a=' + str(a_t)
+        [a_t, itype, imode] = arg
+        name = 'a=' + str(a_t) + '_type=' + str(itype) + '_mode=' + str(imode)
 
     if mode == 'd':
         [a_t, f_1, f_2, f_3] = arg
@@ -247,6 +261,10 @@ def naming(mode, arg):
     if mode == 'h':
         [a_t, b_t, ibin] = arg
         name = 'a=' + str(a_t) + '_b=' + str(b_t) + '_bin=' + str(ibin)
+    
+    if mode == 'i':
+        [a_t ] = arg
+        name = 'a=' + str(a_t)
 
     if mode == 'q' or mode == 'w':
         [l_sph, a_t, b_t] = arg

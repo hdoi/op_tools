@@ -42,7 +42,6 @@ class TestOp_py(unittest.TestCase):
 
         actual = op_tools.op_qw2_spherical.spherical_order_parameter(
             coord, box_length, q_condition, neighbor_list, nei_area, thread_num)
-        print(actual)
         self.assertEqual(expected, actual)
 
 

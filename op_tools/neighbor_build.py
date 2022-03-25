@@ -101,18 +101,21 @@ def build_cell(coord, box_length, thresh_dist):
          for _ in range(cell_size[0])]
 
     for i, _ in enumerate(coord):
-        # periodic boundary condition check
         for j in range(3):
-            if coord[i][j] < 0.0:
-                coord[i][j] = coord[i][j] - math.floor(coord[i][j] / box_length[j] )*box_length[j]
-            if coord[i][j] >= box_length[j]:
-                coord[i][j] = coord[i][j] - math.floor(coord[i][j] / box_length[j] )*box_length[j]
+            coord[i][j] = check_boundary_condition(coord[i][j], box_length[j])
 
         inum = coord_to_cell_num(coord[i], cell_length)
         cell_list[inum[0]][inum[1]][inum[2]].append(i)
 
     return [cell_list, cell_length, cell_size]
 
+
+def check_boundary_condition(x, box_length):
+    if x < 0.0:
+        x = x - math.floor(x / box_length)*box_length
+    if x >= box_length:
+        x = x - math.floor(x / box_length)*box_length
+    return x
 
 def build_neighbor_list(coord, box_length, condition, thread_num):
     """ building neighbor list

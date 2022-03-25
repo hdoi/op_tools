@@ -38,6 +38,8 @@ def param_check_all(op_settings):
         op_settings = param_check(op_settings, 'n_in_B', [1])
         op_settings = param_check(op_settings, 'phi_in_B', [0])
     # C
+        op_settings = param_check(op_settings, 'types_in_C', ['orig'])
+        op_settings = param_check(op_settings, 'opp_mode_in_C', ['dist'])
     # D
     # H
     if 'H' in op_settings['analysis_type']:
@@ -103,7 +105,9 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
     # centrometry parameter analysis (CPA) C
     if 'C' in op_settings['analysis_type']:
         t_start = time.time()
-        setting = {'ave_times': op_settings['ave_times']}
+        setting = {'ave_times': op_settings['ave_times'],
+                   'types': op_setting['types_in_C'],
+                   'modes': op_setting['opp_mode_in_C']}
         op_temp['C_' + NR_name] = op_c_cpa.cpa_order_parameter(
             coord, box_length, setting, n_list, thread_num)
         t_end = time.time()
@@ -192,7 +196,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
                    'b_in_Q': op_settings['b_in_Q'],
-                   'l_in_Q': op_settings['l_in_Q'] }
+                   'l_in_Q': op_settings['l_in_Q']}
         if 'LQ' in op_settings['analysis_type']:
             op_temp['LQ_' + NR_name] = op_lqw_spherical.spherical_order_parameter(
                 coord, box_length, setting, n_list, thread_num)
