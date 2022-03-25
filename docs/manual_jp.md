@@ -118,68 +118,6 @@ $$Y(i) = \frac{ \sum_{j \in \tilde{N}_b(i)}X(j)}{N+1}$$
 
 # 各オーダーパラメータの説明
 
-## $S$ : Onsager's parameter
-
-Onsagerのオーダーパラメータ $S$ は次の式で計算される。[@Onsager1949][@Zannoni1979]
-
-$$ S^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)} {P_n(\cos( \theta ))} }{N}, n even.$$
-
-変数$a$は、隣接粒子で平均化を行う回数。
-変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストである。
-関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)である。変数$n$はDegree of the polynomialである。
-変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}(i)$と粒子$j$の持つ方向ベクトル${\boldsymbol u}(j)$との角度である。
-変数$\cos(\theta)$は通常、${\boldsymbol u}(i) \cdot {\boldsymbol u}(j)$で計算される。
-
-$n = 2, 4$の時、オーダーパラメータ $S$ はそれぞれ以下の式で計算される。
-$$ S^{(a=0, n=2)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 3 \cos^2(\theta) - 1]/2 } }{N} $$
-$$ S^{(a=0, n=4)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 35 \cos^4(\theta) -30 \cos^2(\theta) + 3  ]/8 } }{N} $$
-
-
-隣接粒子数12、隣接半径2.0でのオーダーパラメータの設定として以下の例を示す。
-尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
-
-```
-op_settings = {
-  'neighbor': [12],
-  'radius': [2.0],
-  'ave_times': 1,
-  'n_in_S' : [2],
-  'analysis_type' : ['S']
-   }
-```
-
-## $T$ : McMillan's Sigma
-
-McMillanのパラメータ$T$は次の式で計算される。[@McMillan1971]
-
-$$ T^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) P_n(\cos( \theta )) }   }{N}$$
-
-変数$a$は、隣接粒子で平均化を行う回数。
-変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストである。
-関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)である。変数$n$はDegree of the polynomialである。
-変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}(i)$と粒子$j$の持つ方向ベクトル${\boldsymbol u}(j)$との角度である。
-変数$\cos(\theta)$は、${\boldsymbol u}(i) \cdot {\boldsymbol u}(j)$で計算される。
-変数$z(i,j)$は、ベクトル${\boldsymbol r}(i)$を通過し、ベクトル${\boldsymbol u}(i)$と垂直な平面$P$から、
-ベクトル${\boldsymbol r}(j)$までの距離である。
-変数$d$は、液晶のsmectic相の層から層までの距離である。
-
-$n = 2$の時、オーダーパラメータ $T$ は以下の式で計算される。
-$$ T^{(a=0,n=2)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) [ 3 \cos^2(\theta) - 1 ]/2 }   }{N}$$
-
-隣接粒子数12、隣接半径2.0でのオーダーパラメータの計算条件として以下の例を示す。
-尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
-
-```
-op_settings = {
-  'neighbor': [12],
-  'radius': [2.0],
-  'ave_times': 1,
-  'n_in_T': [2],
-  'd_in_T': [1.0],
-  'analysis_type' : ['T']
-   }
-```
-
 ## $A$ : neighborhood parameters
 
 common neighborhood parameter $A$ [@Honeycutt1987]、predominant common neighborhood parameter $P$ [@Radhi2017]、 another predominant common neighborhood parameter $N$ [@Radhi2017] は非常に似ている式で計算される。
@@ -625,6 +563,68 @@ op_settings = {
   'l_in_Q': [4,6],
   'b_in_Q': 0,
   'analysis_type': ['LQ', 'LW'] }
+```
+
+## $S$ : Onsager's parameter
+
+Onsagerのオーダーパラメータ $S$ は次の式で計算される。[@Onsager1949][@Zannoni1979]
+
+$$ S^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)} {P_n(\cos( \theta ))} }{N}, n even.$$
+
+変数$a$は、隣接粒子で平均化を行う回数。
+変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストである。
+関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)である。変数$n$はDegree of the polynomialである。
+変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}(i)$と粒子$j$の持つ方向ベクトル${\boldsymbol u}(j)$との角度である。
+変数$\cos(\theta)$は通常、${\boldsymbol u}(i) \cdot {\boldsymbol u}(j)$で計算される。
+
+$n = 2, 4$の時、オーダーパラメータ $S$ はそれぞれ以下の式で計算される。
+$$ S^{(a=0, n=2)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 3 \cos^2(\theta) - 1]/2 } }{N} $$
+$$ S^{(a=0, n=4)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 35 \cos^4(\theta) -30 \cos^2(\theta) + 3  ]/8 } }{N} $$
+
+
+隣接粒子数12、隣接半径2.0でのオーダーパラメータの設定として以下の例を示す。
+尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
+
+```
+op_settings = {
+  'neighbor': [12],
+  'radius': [2.0],
+  'ave_times': 1,
+  'n_in_S' : [2],
+  'analysis_type' : ['S']
+   }
+```
+
+## $T$ : McMillan's Sigma
+
+McMillanのパラメータ$T$は次の式で計算される。[@McMillan1971]
+
+$$ T^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) P_n(\cos( \theta )) }   }{N}$$
+
+変数$a$は、隣接粒子で平均化を行う回数。
+変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストである。
+関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)である。変数$n$はDegree of the polynomialである。
+変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}(i)$と粒子$j$の持つ方向ベクトル${\boldsymbol u}(j)$との角度である。
+変数$\cos(\theta)$は、${\boldsymbol u}(i) \cdot {\boldsymbol u}(j)$で計算される。
+変数$z(i,j)$は、ベクトル${\boldsymbol r}(i)$を通過し、ベクトル${\boldsymbol u}(i)$と垂直な平面$P$から、
+ベクトル${\boldsymbol r}(j)$までの距離である。
+変数$d$は、液晶のsmectic相の層から層までの距離である。
+
+$n = 2$の時、オーダーパラメータ $T$ は以下の式で計算される。
+$$ T^{(a=0,n=2)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) [ 3 \cos^2(\theta) - 1 ]/2 }   }{N}$$
+
+隣接粒子数12、隣接半径2.0でのオーダーパラメータの計算条件として以下の例を示す。
+尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
+
+```
+op_settings = {
+  'neighbor': [12],
+  'radius': [2.0],
+  'ave_times': 1,
+  'n_in_T': [2],
+  'd_in_T': [1.0],
+  'analysis_type' : ['T']
+   }
 ```
 
 
