@@ -1,4 +1,8 @@
+# Vim
+*.swp
+
 # Byte-compiled / optimized / DLL files
+__init__.pyc
 __pycache__/
 *.py[cod]
 *$py.class

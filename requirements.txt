@@ -1,0 +1,5 @@
+numpy
+scipy
+pyquaternion
+sympy
+matplotlib
