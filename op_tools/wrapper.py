@@ -11,7 +11,6 @@ from . import op_f_afs
 from . import op_h_aha
 from . import op_i_top
 from . import op_qw_spherical
-from . import op_qw1_spherical
 from . import op_qw2_spherical
 from . import op_lqw_spherical
 from . import op_s_local_onsager
@@ -170,24 +169,6 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
             t_end = time.time()
             print("# Wigner W elap time ", t_end - t_start)
 
-    # Spherical Order parameter Q1 or Wigner Order parameter W1
-    if 'Q1' in op_settings['analysis_type'] or 'W1' in op_settings['analysis_type']:
-        t_start = time.time()
-        setting = {'ave_times': op_settings['ave_times'],
-                   'b_in_Q': op_settings['b_in_Q'],
-                   'l_in_Q': op_settings['l_in_Q'],
-                   'p_in_Q': op_settings['p_in_Q']}
-        if 'Q1' in op_settings['analysis_type']:
-            op_temp['Q1_' + NR_name] = op_qw1_spherical.spherical_order_parameter(
-                coord, box_length, setting, n_list, nei_area, thread_num)
-            t_end = time.time()
-            print("# Spherical Q1 elap time ", t_end - t_start)
-        if 'W1' in op_settings['analysis_type']:
-            op_temp['W1_' + NR_name] = op_qw1_spherical.spherical_order_parameter(
-                coord, box_length, setting, n_list, nei_area, thread_num)
-            t_end = time.time()
-            print("# Wigner W1 elap time ", t_end - t_start)
-
     # Spherical Order parameter Q2 or Wigner Order parameter W2
     if 'Q2' in op_settings['analysis_type'] or 'W2' in op_settings['analysis_type']:
         t_start = time.time()
@@ -206,7 +187,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
             t_end = time.time()
             print("# Wigner W2 elap time ", t_end - t_start)
 
-    # Local Spherical Order parameter Q or Local Wigner Order parameter W2
+    # Local Spherical Order parameter Q or Local Wigner Order parameter W
     if 'LQ' in op_settings['analysis_type'] or 'LW' in op_settings['analysis_type']:
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
