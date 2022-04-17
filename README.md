@@ -38,7 +38,7 @@ See manual and tutorial.
 
 ```
 $ git clone https://github.com/hdoi/op_tools.git
-$ cd order_tools  
+$ cd op_tools  
 $ pip3 install -e .  
 or 
 $ pip3 install -e . --user  
