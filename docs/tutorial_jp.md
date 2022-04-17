@@ -1,7 +1,7 @@
 ---
-title: "op_tools ver 0.1 チュートリアル"
+title: "op_tools ver 0.2.0 チュートリアル"
 date: "Mar 2019"
-author: "土居　英男 (hideo-doi@aist.go.jp)"
+author: "土居　英男 (hideo-doi@rikkoy.ac.jp)"
 ---
 
 \newpage
