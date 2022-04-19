@@ -46,7 +46,7 @@ $ pip3 install -e . --user
 
 # Papers
 
-This software are used in those articles.
+This software can reproduce those articles.
 
 - H. Doi, K.Z. Takahashi, T. Aoyagi, J. Phys. Chem. A 125 (2021) 9518–9526.
 - H. Doi, K.Z. Takahashi, T. Aoyagi, J. Comput. Chem. 42 (2021) 1720–1727.
