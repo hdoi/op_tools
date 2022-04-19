@@ -180,6 +180,7 @@ $$ C^{(a=0,type='all',mode)}(i)  = \sum_{j \in N_b(i)} | {\boldsymbol r}_{ij} + 
 変数$a$は、隣接粒子で平均化を行う回数です。
 変数$N_b(i)$は粒子$i$の$N$個の隣接粒子のリストです。
 変数$M_b(i)$は粒子$i$の最近接の$N/2$個の隣接粒子のリストです。
+変数$type$は、ベクトルを足す回数を指定する変数です。
 変数$mode$は粒子$k$の決め方を示す変数です。
 変数$mode$が'dist'であるとき、粒子$k$は、座標$r_j$を座標$r_i$に関して反対側に移動した座標$r'_j$から距離の一番近い位置にあるリスト$N_b(i)$ある粒子です。
 変数$mode$が'angle'であるとき、粒子$k$は、角度$\theta_{jik}$が一番$\pi$に近いリスト$N_b(i)$にある粒子です。
@@ -192,9 +193,9 @@ op_param = {
     'neighbor': [12],
     'radius': [2.0],
     'ave_times': 1,
-    'analysis_type': ['C'],
     'types_in_C' : ['half'],
-    'modes_in_C' : ['dist'] }
+    'modes_in_C' : ['dist'],
+    'analysis_type': ['C']}
 ```
 
 ## $D$ : neighbor distance analysis (NDA)
@@ -422,7 +423,6 @@ op_settings = {
 ```
 
 ## $Q2, W2$ : function weighting Bond order parameter
-
 
 $$ Q2^{(l,a=0,b)}_i = \sqrt{\frac{4\pi}{2l+1}\sum_{m=-l}^{l}|q^{(l,a=0,b)}_{lm}(i)|^2}$$
 $$ q^{(l,a=0,b)}_{lm}(i) = \frac{1}{N+1}\sum_{j \in \tilde{N}_b(i)}q^{(l,a=0,b-1)}_{lm}(j) $$

@@ -50,10 +50,30 @@ Install
 
 ::
 
-   $ cd order_tools  
+   $ git clone https://github.com/hdoi/op_tools.git
+   $ cd op_tools  
    $ pip3 install -e .  
    or 
    $ pip3 install -e . --user  
 
+Papers
+======
+
+This software are used in those articles.
+
+-  H. Doi, K.Z. Takahashi, T. Aoyagi, J. Phys. Chem. A 125 (2021)
+   9518–9526.
+-  H. Doi, K.Z. Takahashi, T. Aoyagi, J. Comput. Chem. 42 (2021)
+   1720–1727.
+-  H. Doi, K.Z. Takahashi, T. Aoyagi, J. Chem. Phys. 154 (2021) 164505.
+-  H. Doi, K.Z. Takahashi, T. Aoyagi, J. Chem. Phys. 152 (2020) 214501.
+-  H. Doi, K.Z. Takahashi, K. Tagashira, J. Fukuda, T. Aoyagi, Sci.
+   Rep. 9 (2019) 16370.
+
 Licence
 =======
+
+|License: MIT|
+
+.. |License: MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT

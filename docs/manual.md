@@ -19,7 +19,7 @@ This type of analysis is used in simulations of melting solid metals and in the 
 
 # How to install
 
-$ git clone https://github.com/hdoi/op_tools.git
+$ git clone https://github.com/hdoi/op_tools.git  
 $ cd op_tools  
 $ pip install -e .  
 
@@ -133,8 +133,6 @@ op_param = {
   'neighbor': [12],
   'radius': [1.5],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
   'm_in_A': [2],
   'types_in_A': ['A', 'P', 'N'],
   'analysis_type': ['A']}
@@ -152,7 +150,7 @@ The list $N_b(i)$ is the list of $N$ neighborhood particles of particle $i$.
 The variable $\theta_{jik}$ is the angle between vector ${\boldsymbol r}_{ij}$ and vector ${\boldsymbol r}_{ik}$.
 The variable $m$ is the coefficient of the angle.
 The variable $n$ is the exponent of the cos function.
-The variable $\phi$ is the angle for the function correction.
+The variable $\phi$ is the intercept of angle.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
@@ -161,8 +159,6 @@ op_param = {
   'neighbor': [12],
   'radius': [1.5],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
   'm_in_B': [2],
   'phi_in_B': [0],
   'n_in_B': [1, 2],
@@ -179,6 +175,7 @@ $$ C^{(a=0,type='all',mode)}(i)  = \sum_{j \in N_b(i)} | {\boldsymbol r}_{ij} + 
 The variable $a$ is the number of times to perform averaging the value amoung neighborhood particles.
 The list $N_b(i)$ is the list of $N$ neighborhood particles of particle $i$.
 The variable $M_b(i)$ is the list of $N/2$ nearest neighbors of particle $i$.
+The variable $type$ is a variable that specifies the number of times to add vectors.
 The variable $mode$ is indicating how to determine particle $K$.
 When the variable $mode$ is 'dist'$, particle $k$ is the particle in the list $N_b(i)$ nearest from the coordinate $r'_j$, opposite side of particle $r_i$.
 When the variable $mode$ is 'angle', particle $k$ is the particle in the list $N_b(i)$ whose angle $\theta_{jik}$ is closest to $\pi$.
@@ -191,9 +188,9 @@ op_param = {
     'neighbor': [12],
     'radius': [2.0],
     'ave_times': 1,
-    'oi_oj': [0],
-    'o_factor': [0.00],
-    'analysis_type': ['C'] }
+    'types_in_C' : ['half'],
+    'modes_in_C' : ['dist'],
+    'analysis_type': ['C']}
 ```
 
 ## $D$ : neighbor distance analysis (NDA)
@@ -219,9 +216,7 @@ op_settings = {
   'neighbor': [12],
   'radius': [2.0],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
-  'function': [f_1],
+  'function': [f1],
   'analysis_type': ['D'] }
 ```
 
@@ -249,10 +244,8 @@ op_settings = {
   'neighbor': [12],
   'radius': [2.0],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
   'l_in_F': [1],
-  'function': [f_1],
+  'function': [f1],
   'analysis_type': ['F']}
 ```
 
@@ -282,8 +275,6 @@ op_settings = {
   'neighbor': [12],
   'radius': [2.0],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
   'b_in_H': 1,
   'bin_in_H': [24],
   'nu_in_H': [3],
@@ -314,7 +305,7 @@ op_settings = {
 
 ## $Q$ : Bond order parameter
 
-Bond order parameter $Q$ は以下の式で計算される。[@Steinhardt1983][@Lechner2008]
+Bond order parameter $Q$ is calculated as follows. [@Steinhardt1983][@Lechner2008]
 
 $$ Q^{(l,a=0,b)}_i = \sqrt{\frac{4\pi}{2l+1}\sum_{m=-l}^{l}|q^{(l,a=0,b)}_{lm}(i)|^2}$$
 $$ q^{(l,a=0,b)}_{lm}(i) = \frac{1}{N+1}\sum_{j \in \tilde{N}_b(i)}q^{(l,a=0,b-1)}_{lm}(j) $$
@@ -363,6 +354,7 @@ op_settings = {
   'analysis_type' : ['Q'] }
 ```
 
+
 ## $W$ : Bond order parameter
 
 Bond order parameter $W$ is calculated as follows. [@Steinhardt1983][@Lechner2008]
@@ -383,7 +375,7 @@ The variable $b$ is the number of times the spherical harmonic function is avera
 The function $Y$ is the spherical harmonic function.
 Variables $\theta_{ij}, \phi_{ij}$ are angles in the spherical coordinate system representation of vector ${\boldsymbol r}_{ij}$, where $\theta$ is the angle from the $z$ axis and $\phi$ is the angle from the $x$ axis.
 The variables $m_1,m_2,m_3$ take values from $-l$ to $l$, but are calculated only when $m_1+m_2+m_3=0$.
-The matrix $\left( \begin{array}{ccc} l & l & l \{m_1 & m_2 & m_3 \end{array} \right)$ is a Wigner 3-$j$ symbol.
+The matrix $\left( \begin{array}{ccc} l & l & l \\ m_1 & m_2 & m_3 \end{array} \right)$ is a Wigner 3-$j$ symbol.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
@@ -508,6 +500,7 @@ lq^{(l,a=0,b)}_{lm_1}(i) lq^{(l,a=0,b)}_{lm_2}(i) lq^{(l,a=0,b)}_{lm_3}(i) }{ \l
 $$ lq^{(l,a,b)}_{lm}(i) = \frac{1}{N}\sum_{j \in N_b(i)} \frac{q^{(l,a,b)}_{lm}(i) q^{\ast(l,a,b)}_{lm}(j)}{ | q^{(l,a,b)}_{lm}(i) | |  q^{(l,a,b)}_{lm}(j) | } $$
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
+That calculate the similar order parameters in [@Moore2010].
 
 ```
 op_settings = {
@@ -519,36 +512,32 @@ op_settings = {
   'analysis_type': ['LQ', 'LW'] }
 ```
 
-
-
 ## $S$ : Onsager's parameter
 
 Onsager's order parameter $S$ is calculated as follows. [@Onsager1949][@Zannoni1979]
 
-$$ S^{(a=1,n)}(i) = \frac{ \sum_{j \in N_b(i)} {P_n(\cos( \theta ))} }{N}$$
+$$ S^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)} {P_n(\cos( \theta ))} }{N}$$
 
 The variable $a$ is the number of times to perform averaging the value amoung neighborhood particles.
 The list $N_b(i)$ is the list of $N$ neighborhood particles of particle $i$.
-関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)である。
-変数$n$はDegree of the polynomialで偶数である。
-変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}(i)$と粒子$j$の持つ方向ベクトル${\boldsymbol u}(j)$との角度である。
-変数$\cos(\theta)$は通常、${\boldsymbol u}(i) \cdot {\boldsymbol u}(j)$で計算される。
+The function $P_n$ is [Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials).
+The variable $N$ is Degree of the polynomial and is even.
+The variable $\theta$ is the angle between the direction vector ${\boldsymbol u}(i)$ of particle $i$ and the direction vector ${\boldsymbol u}(j)$ of particle $j$.
+The variable $\cos(\theta)$ is usually calculated by ${\boldsymbol u}(i)\cdot {\boldsymbol u}(j)$.
 
-$n = 2, 4$の時、オーダーパラメータ $S$ はそれぞれ以下の式で計算される。
-$$ S^{(a=1, n=2)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 3 \cos^2(\theta) - 1]/2 } }{N} $$
-$$ S^{(a=1, n=4)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 35 \cos^4(\theta) -30 \cos^2(\theta) + 3  ]/8 } }{N} $$
+When $n = 2, 4$, the order parameter $S$ is calculated by the following equations, respectively.
+$$ S^{(a=0, n=2)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 3 \cos^2(\theta) - 1]/2 } }{N} $$
+$$ S^{(a=0, n=4)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 35 \cos^4(\theta) -30 \cos^2(\theta) + 3  ]/8 } }{N} $$
 
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
-尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
+Note that this order parameter requires the direction vector.
 
 ```
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
   'ave_times': 1,
-  'oi_oj': [0],
-  'o_factor': [0.00],
   'n_in_S' : [2],
   'analysis_type' : ['S']
    }
@@ -556,22 +545,23 @@ op_settings = {
 
 ## $T$ : McMillan's Sigma
 
-McMillanのパラメータ$T$は次の式で計算される。[@McMillan1971]
+McMillan's order parameter $T$ is calculated as follows. [@McMillan1971]
 
 $$ T^{(a=0,n)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) P_n(\cos( \theta )) }   }{N}$$
 
 The variable $a$ is the number of times to perform averaging the value amoung neighborhood particles.
 The list $N_b(i)$ is the list of $N$ neighborhood particles of particle $i$.
-関数$P_n$は[Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials)です。変数$n$はDegree of the polynomialです。
-変数$\theta$は、粒子$i$の持つ方向ベクトル${\boldsymbol u}_i$と粒子$j$の持つ方向ベクトル${\boldsymbol u}_j$との角度です。
-変数$z(i,j)$は、粒子$i$を通過し、ベクトル${\boldsymbol u}_i$と垂直な平面$P$から、粒子$j$$までの距離です。
-変数$d$は、液晶のsmectic相の層から層までの距離です。
+The function $P_n$ is [Legendre polynomial](https://en.wikipedia.org/wiki/Legendre_polynomials).
+The variable $N$ is Degree of the polynomial and is even.
+The variable $\theta$ is the angle between the direction vector ${\boldsymbol u}_i$ of particle $i$ and the direction vector ${\boldsymbol u}_j$ of particle $j$.
+The variable $Z(i,j)$ is the distance from the plane $P$, which passes through particle $i$ and is perpendicular to the direction vector ${\boldsymbol u}_i$$, to particle $j$$.
+The variable $D$ is the distance from layer to layer of the smectic phase of the liquid crystal.
 
-$n = 2$の時、オーダーパラメータ $T$ は以下の式で計算される。
+When $n = 2$, the order parameter $T$ is calculated as follows.
 $$ T^{(a=0,n=2)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) [ 3 \cos^2(\theta) - 1 ]/2 }   }{N}$$
 
-隣接粒子数12、隣接半径2.0でのオーダーパラメータの計算条件として以下の例を示す。
-尚、このオーダーパラメータは計算のために方向ベクトルが必須であるため、質点や球状粒子の解析に使う事はできない。
+The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
+Note that this order parameter requires the direction vector.
 
 ```
 op_settings = {
@@ -586,7 +576,7 @@ op_settings = {
 
 ## $Z$ : user define order parameter
 
-ユーザーが定義するためのオーダーパラメータ $Z$ を用意している。
+An order parameter $Z$ is provided for the user to define.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 ```
@@ -595,70 +585,71 @@ op_settings = {
   'radius': [2.0],
   'analysis_type': ['Z'] }
 ```
-オーダーパラメータの計算部分としては、 op_tools/op_z_user_define.py である。
-このファイルを編集し、ユーザーの考えたオーダーパラメータを実装することが可能である。
+The calculation part of the order parameter is op_tools/op_z_user_define.py.
+It is possible to edit this file and implement the order parameter that the user has thought of.
 
-# 大量の解析を行う設定
+# Setting for many types analysis
 
-  現実的に実行するためには、非常に長い計算が必要だろう。
+This takes much time.
 
 ```
   def f_1(r):
       return r
   op_settings = {  
-    # 隣接粒子半径の設定
-    'neighbor'       : [8],               # 隣接粒子数
-    'radius'         : [1.5],             # 隣接半径
-    'ave_times'      : 1,                 # あるオーダーパラメータを周囲の粒子で平均を計算する回数  
-    'oi_oj'          : [1,0,-1],          # 粒子の座標をどの点にするかという設定 粒子 => [0], 直線 => [1,-1](先端、後端),  楕円体 => [0, 1, -1] (中心、先端、後端)  
-    'o_factor'       : [0.5, 1.0, 1.5],   # 方向ベクトルの長さの設定
+    # neighborhood particles settings
+    'neighbor'       : [8],               # number of neighborhood particles
+    'radius'         : [1.5],             # adjacency radius
+    'ave_times'      : 1,                 # average time
     # A
-    'op_types' : ['A','P','N'],           # オーダーパラメータ A での解析の種類の指定
-    'm_in_A'         : [2, 4],            # 粒子i,粒子j からの距離の近い粒子jの粒子数
+    'op_types' : ['A','P','N'],    # specify the type of analysis in order parameter A
+    'm_in_A'         : [2, 4],     # number of neighborhood particles from particle i and j
     # B
-    'm_in_B' : [2],                       # 角度の係数
-    'n_in_B': [1, 2],                     # cosine関数の指数
-    'phi_in_B': [0],                      # 角度のoffset
+    'm_in_B' : [2],                # factor of angle
+    'n_in_B': [1, 2],              # exponent of cos function
+    'phi_in_B': [0],               # intercept of angle
     # C
+    'types_in_C' : ['half'],       # number of vector adding
+    'modes_in_C' : ['dist'],       # search method for opposite side particle
     # D
-    'function': [f_1]                     # 関数の種類
+    'function': [f1]               # function
     # F
-    'l_in_F' : [1],                       # 角度の係数
+    'l_in_F' : [1],                # factor of angle
     # H
-    'b_in_H' : 1,                         # 角度のヒストグラムを平均化する回数
-    'bin_in_H' : [24],                    # ヒストグラムのビンの数
-    'nu_in_H' : [3],                      # 抜き出す角度の周波数成分。この例では pi/3 の周波数の成分の指定になっている。
+    'b_in_H' : 1,                  # number of averaging of angle histogram
+    'bin_in_H' : [24],             # bin of histogram
+    'nu_in_H' : [3],               # frequency components of angle, (pi/3)
     # I
     # Q
-    'b_in_Q'         : 1,                 # 球面調和関数を平均化する回数
-    'l_in_Q'         : [2, 4, 6],         # 球面調和関数の次数を指定するパラメータl  
-    'p_in_Q'         : [0],               # その粒子の方向ベクトルに関する重み
+    'b_in_Q'         : 1,          # number of averaging of spherical harmonic function
+    'l_in_Q'         : [2, 4, 6],  # parameter for spherical harmonic
+    # Q2 W2
+    'function_in_Q2' : [f2],       # weighting functin
+    # LQ LW
     # S
-    'n_in_S'         : [2],               # Degree of Legendre_polynomials
+    'n_in_S'         : [2],        # degree of Legendre_polynomials
     # T
-    'n_in_T'         : [2],               # Degree of Legendre_polynomials
-    'd_in_T': [1.0],
-    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 'Q', 'W', 'S', 'T']} # 解析するオーダーパラメータの種類
+    'n_in_T'         : [2],        # degree of Legendre_polynomials
+    'd_in_T'         : [1.0],      # distance between layers of smectic phase
+    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 
+    'Q', 'W', 'Q2', 'W2', 'LQ', 'LW', 'S', 'T']} # Order parameter types
 ```
 
-# 出力のフォーマット
+# Output format
 
-次のように使用する。
+User can use as follows.
 ```
   import order_tools
   order_param_data = \
     op_analyze(coord, direct, box_length, op_settings)
 ```
-出力として各粒子のオーダーパラメータが計算される。
-各粒子のオーダーパラメータにアクセスするためには、
+To access the order parameters for each particle,
 ```
   order_param_data['Q_N6_a=1_b_1']
 ```
 
-- Q : オーダーパラメータの種類
-- N6 : 隣接粒子の条件
-- 'a=1_b=1' : オーダーパラメータの計算に使用したパラメータ
-
+- Q : Types of order parameter
+- N6 : setting of neighborhood particles
+- 'a=1_b=1' : parameter of order parameter calculation
 
 
 # Reference
