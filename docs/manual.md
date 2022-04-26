@@ -1,12 +1,11 @@
----
-title: "User manual for op_tools ver 0.2.0"
-date: "April 2022"
-author: "Hideo Doi"
----
+# op_tools ver0.2.0 User Manual
+
+date: "2022 04/01"
+author: "Hideo Doi" (doi.hideo.chemistry@gmail.com)
 
 \newpage
 
-# What is this?
+### What is this?
 
 A python module for analyzing crystal structures in molecular and particle simulations.
 The environment surrounding each particle or atom is evaluated and converted into a numerical value.
@@ -16,70 +15,74 @@ For body-centered cubic (BCC) and face-centered cubic (FCC) lattices, the order 
 For example, the location of the boundary between solid and liquid.
 This type of analysis is used in simulations of melting solid metals and in the analysis of grain boundaries of crystals.
 
+### How to install
 
-# How to install
+```bash
+git clone https://github.com/hdoi/op_tools.git
+cd op_tools
+pip install -e .
+```
 
-$ git clone https://github.com/hdoi/op_tools.git  
-$ cd op_tools  
-$ pip install -e .  
+### data requirement
 
-# data requirement
-  1. coord                     : List of coordinates of each particles.  Such as [ [0,0,0], [0,0,1], ... ] like [[x1, y1, z1], [x2, y2, z2], ... ]  
-  2. direct (optional)         : Direction vector of each particle. It may be a three-dimensional unit vector or a quaternion. Such as [[1,0,0], ...] or [[1,0,0,0], ....]  
+  1. coord                     : List of coordinates of each particles.  Such as [ [0,0,0], [0,0,1], ... ] like [[x1, y1, z1], [x2, y2, z2], ... ]
+  2. direct (optional)         : Direction vector of each particle. It may be a three-dimensional unit vector or a quaternion. Such as [[1,0,0], ...] or [[1,0,0,0], ....]
     In the case of a three-dimensional unit vector, the order is [x, y, z]. In the case of quaternions, the order is [w, x, y, z].
     In the case of a mass point or spherical particle, It has no direction vector. There is no problem with direct = [].
   3. box_length                : The length of the simulation box. Such as [3, 3, 3]
   4. op_settings : Settings for calculating each order parameter
 
+## Common settings for all order parameters
 
-# Common settings for all order parameters
-
-## Neibhorhood particle setting
+### Neibhorhood particle setting
 
 The numerical value of the order parameter for each particle is calculated using the coordinates of nearby particles.
 The particles near a particle $i$ are called the neighborhood particles.
 There are three methods implemented in this program to determine the neighborhood particles.
-The first method is to consider a particle to be an adjacent particle of particle $i$ if it is within a certain distance (adjacency radius) from particle $i$. 
-The advantage of this method is that it is relatively easy to implement and user-friendly. 
-The disadvantages are that the number of neighborhood particles may be different for each particle and that it is scale dependent. 
-For example, specifying an adjacency radius of 1 nm and 1 angstrom will give different results. 
-This is called scale-dependency. 
-The second method is to use $n$ particles close to particle $i$ as neighbors. 
-The advantage is that there is no scale-dependency and the adjacent particles do not change if the length unit changes, because the relationship of distance is unchanged. 
-The disadvantages are that it is not easy to implement, the computational cost is slightly higher, and it is not widely used. 
-The third method is Delaunay partitioning ([Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram)). 
-After performing the Voronoi partitioning, two particles sharing each Voronoi facet are considered as adjacent particles. 
+The first method is to consider a particle to be an adjacent particle of particle $i$ if it is within a certain distance (adjacency radius) from particle $i$.
+The advantage of this method is that it is relatively easy to implement and user-friendly.
+The disadvantages are that the number of neighborhood particles may be different for each particle and that it is scale dependent.
+For example, specifying an adjacency radius of 1 nm and 1 angstrom will give different results.
+This is called scale-dependency.
+The second method is to use $n$ particles close to particle $i$ as neighbors.
+The advantage is that there is no scale-dependency and the adjacent particles do not change if the length unit changes, because the relationship of distance is unchanged.
+The disadvantages are that it is not easy to implement, the computational cost is slightly higher, and it is not widely used.
+The third method is Delaunay partitioning ([Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram)).
+After performing the Voronoi partitioning, two particles sharing each Voronoi facet are considered as adjacent particles.
 
-###  Setting for neighborhood radius
+#### Setting for neighborhood radius
 
-```
+```python
   op_settings = {
-    'radius' : [1.5, 1.75] ,  
+    'radius' : [1.5, 1.75] ,
     ... ( other parameter settings ) }
 ```
+
 User can specify in the list format, and it is also possible to specify multiple conditions at the same time.
 In the above example, the radius setting is 1.5 and 1.75. ..
 
-###  Setting for the number of neighborhood particles
+#### Setting for the number of neighborhood particles
 
-```
+```python
   op_settings = {
-    'neighbor' : [8, 12] ,  
+    'neighbor' : [8, 12] ,
     ... ( other parameter settings ) }
 ```
+
 User can specify in the list format, and it is also possible to specify multiple conditions at the same time.
 In the above example, the number of neighborhood particles setting is 8 and 12. ..
 
-###  Setting for Delaunay partitioning
+#### Setting for Delaunay partitioning
 
-```
+```python
   op_settings = {
     'Delaunay': ['standard']
     ... ( other parameter settings ) }
 ```
+
 In the above example, Delauneay partitioning is used.
 
-## Setting for the number of times for averaging
+### Setting for the number of times for averaging
 
 When the classification performance of the order parameter of each particle does not enough performance, to increase the performance, user can perform the averaging calculation.
 The average is calculated with the order parameter of particle $i$ and the order parameter of neighborhood particles of particle $i$.
@@ -87,7 +90,7 @@ $N_b(i)$ is a list of $N$ neighborhood particles of particle $i$.
 $\tilde{N}_b(i)$ is a list of $N + 1$ particles that $i$ itself is added to $N_b(i)$.
 The order parameter of the particles $i$ before averaging is $X(i)$ and the order parameter after averaging is $Y(i)$.
 The following calculation is performed.
-$$Y(i) = \frac{ \sum_{j \in \tilde{N}_b(i)}X(j)}{N+1}$$ 
+$$Y(i) = \frac{ \sum_{j \in \tilde{N}_b(i)}X(j)}{N+1}$$
 
 This averaging calculation has the following advantages and disadvantages.
 The advantage is that the calculation cost is low, and it is possible to improve the classification performance of the same order parameter,
@@ -103,16 +106,16 @@ Using distant particle information leads the indistinctness of position.
 The number of times of this averaging is specified by op_settings specifying the calculation condition of the order parameter as follows.
 Note that this value starts from 0, and in the case of 0, averaging is not performed.
 
-```
+```python
   op_settings = {
-    'ave_times'      : 1, 
+    'ave_times'      : 1,
     ... ( other parameter settings )
      }
 ```
 
-# List of order parameters
+## List of order parameters
 
-## $A$ : neighborhood parameters
+### $A$ : neighborhood parameters
 
 common neighborhood parameter $A$ [@Honeycutt1987], predominant common neighborhood parameter $P$ [@Radhi2017],  another predominant common neighborhood parameter $N$ [@Radhi2017] are calculated using very similar formulas.
 Order paraemter $P$ and $N$ are implemented as a another type of order parameter $A$.
@@ -128,7 +131,7 @@ The variable $type$ specifies the type of order parameter.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_param = {
   'neighbor': [12],
   'radius': [1.5],
@@ -138,7 +141,7 @@ op_param = {
   'analysis_type': ['A']}
 ```
 
-## $B$ : bond angle analysis (BAA)
+### $B$ : bond angle analysis (BAA)
 
 Bond angle analysis $B$ is calculated as follows. [@Ackland2006]
 
@@ -154,7 +157,7 @@ The variable $\phi$ is the intercept of angle.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_param = {
   'neighbor': [12],
   'radius': [1.5],
@@ -165,7 +168,7 @@ op_param = {
   'analysis_type': ['B']}
 ```
 
-## $C$ : centrosymmetry parameter analysis (CPA)
+### $C$ : centrosymmetry parameter analysis (CPA)
 
 centrosymmetry parameter $C$ is calculated as follows.[@Kelchner1998]
 
@@ -183,7 +186,7 @@ Two methods were implemented for use with liquids as well as solids.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_param = {
     'neighbor': [12],
     'radius': [2.0],
@@ -193,7 +196,7 @@ op_param = {
     'analysis_type': ['C']}
 ```
 
-## $D$ : neighbor distance analysis (NDA)
+### $D$ : neighbor distance analysis (NDA)
 
 neighbor distance analysis $D$ is calculated as follows. [@Stukowski2012]
 
@@ -208,7 +211,7 @@ The distances also satisfy $ r_{ij} <= r_{ik}$.
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 The following example is for the function $\{f_{ij}(r), f_{ik}(r), f_{jk}(r) \} = r$.
 
-```
+```python
 def f_1(r):
     return r
 
@@ -220,7 +223,7 @@ op_settings = {
   'analysis_type': ['D'] }
 ```
 
-## $F$ : angular Fourier series (AFS) like parameter
+### $F$ : angular Fourier series (AFS) like parameter
 
 angular Fourier series parameter $F$ is calculated as follows. [@Bartok2013][@Seko2018]
 
@@ -236,7 +239,7 @@ The distance satisfies $r_{ij} <= r_{ik}$.
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 The following example is for the function $\{f_{ij}(r), f_{ik}(r) \} = r$.
 
-```
+```python
 def f_1(r):
     return r
 
@@ -249,7 +252,7 @@ op_settings = {
   'analysis_type': ['F']}
 ```
 
-## $H$ : angle histogram analysis (AHA)
+### $H$ : angle histogram analysis (AHA)
 
 angle histogram analysis $H$は次の式で計算される。
 
@@ -270,7 +273,7 @@ This is because the delta function $\delta$ becomes 1 only when the frequency co
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -281,7 +284,7 @@ op_settings = {
   'analysis_type': ['H'] }
 ```
 
-## $I$ : tetrahedron order parameter (TOP)
+### $I$ : tetrahedron order parameter (TOP)
 
 Tetrahedron order parameter $I$ is calculated as follows. [@CHAU1998][@Duboue-Dijon2015]
 
@@ -293,7 +296,7 @@ The variable $\theta_{jik}$ is the angle between the vector ${\boldsymbol r}_{ij
 
 The following example shows the conditions for calculating the order parameter with 4 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_settings = {
   'neighbor': [4],
   'radius': [2.0],
@@ -301,9 +304,7 @@ op_settings = {
   'analysis_type': ['I'] }
 ```
 
-
-
-## $Q$ : Bond order parameter
+### $Q$ : Bond order parameter
 
 Bond order parameter $Q$ is calculated as follows. [@Steinhardt1983][@Lechner2008]
 
@@ -320,7 +321,7 @@ The variables $\theta_{ij}, \phi_{ij}$ are angles in the spherical coordinate sy
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -332,7 +333,7 @@ op_settings = {
 
 Steinhardt's order parameter [@Steinhardt1983] can be calculated with the following setting.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -344,7 +345,7 @@ op_settings = {
 
 Lechner's order parameter [@Lechner2008] can be calculated with the following setting.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -354,8 +355,7 @@ op_settings = {
   'analysis_type' : ['Q'] }
 ```
 
-
-## $W$ : Bond order parameter
+### $W$ : Bond order parameter
 
 Bond order parameter $W$ is calculated as follows. [@Steinhardt1983][@Lechner2008]
 
@@ -363,7 +363,7 @@ $$ W^{(l,a=0,b)}_i = \frac{\sum_{m_1+m_2+m_3=0}
 \left( \begin{array}{ccc}
   l & l & l \\
   m_1 & m_2 & m_3
-\end{array} \right) 
+\end{array} \right)
 q^{(l,a=0,b)}_{lm_1}(i) q^{(l,a=0,b)}_{lm_2}(i) q^{(l,a=0,b)}_{lm_3}(i) }{ \left( \sum_{m=-l}^{l} |q^{(l,a=0,b)}_{lm}(i)|^2  \right)^{3/2}  }$$
 $$ q^{(l,a=0,b)}_{lm}(i) = \frac{1}{N+1}\sum_{j \in \tilde{N}_b(i)}q^{(l,a=0,b-1)}_{lm}(j) $$
 $$ q^{(l,a=0,b=0)}_{lm}(i) = \frac{1}{N} \sum_{j \in N_b(i)} Y_{lm}(\theta_{ij}, \phi_{ij}) $$
@@ -379,7 +379,7 @@ The matrix $\left( \begin{array}{ccc} l & l & l \\ m_1 & m_2 & m_3 \end{array} \
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -391,7 +391,7 @@ op_settings = {
 
 Steinhardt's order parameter [@Steinhardt1983] can be calculated with the following setting.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -403,7 +403,7 @@ op_settings = {
 
 Lechner's order parameter [@Lechner2008] can be calculated with the following setting.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -413,7 +413,7 @@ op_settings = {
   'analysis_type': ['W'] }
 ```
 
-## $Q2, W2$ : function weighting Bond order parameter
+### $Q2, W2$ : function weighting Bond order parameter
 
 $$ Q2^{(l,a=0,b)}_i = \sqrt{\frac{4\pi}{2l+1}\sum_{m=-l}^{l}|q^{(l,a=0,b)}_{lm}(i)|^2}$$
 $$ q^{(l,a=0,b)}_{lm}(i) = \frac{1}{N+1}\sum_{j \in \tilde{N}_b(i)}q^{(l,a=0,b-1)}_{lm}(j) $$
@@ -434,13 +434,12 @@ $$ W2^{(l,a=0,b)}_i = \frac{\sum_{m_1+m_2+m_3=0}
 \left( \begin{array}{ccc}
   l & l & l \\
   m_1 & m_2 & m_3
-\end{array} \right) 
+\end{array} \right)
 q^{(l,a=0,b)}_{lm_1}(i) q^{(l,a=0,b)}_{lm_2}(i) q^{(l,a=0,b)}_{lm_3}(i) }{ \left( \sum_{m=-l}^{l} |q^{(l,a=0,b)}_{lm}(i)|^2  \right)^{3/2}  }$$
-
 
 If you use Delaunay partitioning, you can calculate Mickel's order parameter as follows. [@Mickel2013]
 
-```
+```python
 def f1(j, voronoi_area_list, distance_list):
     weight = voronoi_area_list[j] / np.sum(voronoi_area_list)
     return weight
@@ -457,7 +456,7 @@ In addition, you can use other weighting function, such as weighting based on di
 The following example is a setting weighting function based on the distance.
 The more distance is the more less weight.
 
-```
+```python
 def f1(j, voronoi_area_list, distance_list):
     sum_weight = 0
     for dist in distance_list:
@@ -474,8 +473,7 @@ op_settings = {
   'analysis_type': ['Q2'] }
 ```
 
-
-## $LQ, LW$ : local Bond order parameter
+### $LQ, LW$ : local Bond order parameter
 
 These order parameters ware implemented in imitation of [@Moore2010][@Fitzner2020][@Tribello2017].
 
@@ -495,14 +493,14 @@ $$ LW^{(l,a=0,b)}_i = \frac{\sum_{m_1+m_2+m_3=0}
 \left( \begin{array}{ccc}
   l & l & l \\
   m_1 & m_2 & m_3
-\end{array} \right) 
+\end{array} \right)
 lq^{(l,a=0,b)}_{lm_1}(i) lq^{(l,a=0,b)}_{lm_2}(i) lq^{(l,a=0,b)}_{lm_3}(i) }{ \left( \sum_{m=-l}^{l} |lq^{(l,a=0,b)}_{lm}(i)|^2  \right)^{3/2}  }$$
 $$ lq^{(l,a,b)}_{lm}(i) = \frac{1}{N}\sum_{j \in N_b(i)} \frac{q^{(l,a,b)}_{lm}(i) q^{\ast(l,a,b)}_{lm}(j)}{ | q^{(l,a,b)}_{lm}(i) | |  q^{(l,a,b)}_{lm}(j) | } $$
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 That calculate the similar order parameters in [@Moore2010].
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -512,7 +510,7 @@ op_settings = {
   'analysis_type': ['LQ', 'LW'] }
 ```
 
-## $S$ : Onsager's parameter
+### $S$ : Onsager's parameter
 
 Onsager's order parameter $S$ is calculated as follows. [@Onsager1949][@Zannoni1979]
 
@@ -529,11 +527,10 @@ When $n = 2, 4$, the order parameter $S$ is calculated by the following equation
 $$ S^{(a=0, n=2)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 3 \cos^2(\theta) - 1]/2 } }{N} $$
 $$ S^{(a=0, n=4)}(i) = \frac{ \sum_{j \in N_b(i)} { [ 35 \cos^4(\theta) -30 \cos^2(\theta) + 3  ]/8 } }{N} $$
 
-
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 Note that this order parameter requires the direction vector.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -543,7 +540,7 @@ op_settings = {
    }
 ```
 
-## $T$ : McMillan's Sigma
+### $T$ : McMillan's Sigma
 
 McMillan's order parameter $T$ is calculated as follows. [@McMillan1971]
 
@@ -563,7 +560,7 @@ $$ T^{(a=0,n=2)}(i) = \frac{ \sum_{j \in N_b(i)}{ \cos( 2 \pi z(i,j) / d ) [ 3 \
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
 Note that this order parameter requires the direction vector.
 
-```
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
@@ -574,28 +571,30 @@ op_settings = {
    }
 ```
 
-## $Z$ : user define order parameter
+### $Z$ : user define order parameter
 
 An order parameter $Z$ is provided for the user to define.
 
 The following example shows the conditions for calculating the order parameter with 12 neighborhood particles and 2.0 adjacency radius.
-```
+
+```python
 op_settings = {
   'neighbor': [12],
   'radius': [2.0],
   'analysis_type': ['Z'] }
 ```
+
 The calculation part of the order parameter is op_tools/op_z_user_define.py.
 It is possible to edit this file and implement the order parameter that the user has thought of.
 
-# Setting for many types analysis
-
+## Setting for many types analysis
+uj
 This takes much time.
 
-```
+```python
   def f_1(r):
       return r
-  op_settings = {  
+  op_settings = {
     # neighborhood particles settings
     'neighbor'       : [8],               # number of neighborhood particles
     'radius'         : [1.5],             # adjacency radius
@@ -630,20 +629,23 @@ This takes much time.
     # T
     'n_in_T'         : [2],        # degree of Legendre_polynomials
     'd_in_T'         : [1.0],      # distance between layers of smectic phase
-    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I', 
+    'analysis_type': ['A', 'B', 'C', 'D', 'F', 'H', 'I',
     'Q', 'W', 'Q2', 'W2', 'LQ', 'LW', 'S', 'T']} # Order parameter types
 ```
 
-# Output format
+## Output format
 
 User can use as follows.
-```
+
+```python
   import order_tools
   order_param_data = \
     op_analyze(coord, direct, box_length, op_settings)
 ```
+
 To access the order parameters for each particle,
-```
+
+```python
   order_param_data['Q_N6_a=1_b_1']
 ```
 
@@ -651,6 +653,4 @@ To access the order parameters for each particle,
 - N6 : setting of neighborhood particles
 - 'a=1_b=1' : parameter of order parameter calculation
 
-
-# Reference
-
+## Reference
