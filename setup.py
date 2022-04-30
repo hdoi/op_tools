@@ -11,11 +11,11 @@ with open('LICENSE') as f:
 
 setup(
     name='op_tools',
-    version='0.2.0',
+    version='0.2.1',
     description='op_tools',
     long_description=readme,
     author='Hideo Doi',
-    author_email='doi.hideo.chemistry@gmail',
+    author_email='doi.hideo.chemistry@gmail.com',
     url='https://github.com/hdoi/op_tools',
     license=license,
     install_requires=['numpy', 'scipy', 'pyquaternion', 'sympy', 'matplotlib'],

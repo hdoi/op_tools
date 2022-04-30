@@ -1,3 +1,4 @@
+from .__version import __version__ 
 from .wrapper import op_analyze_with_neighbor_list
 from .wrapper import op_analyze
 from .neighbor_build import build_neighbor_list

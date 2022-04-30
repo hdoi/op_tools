@@ -8,6 +8,7 @@ sys.path.insert( 0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..'
 import op_tools
 import numpy as np
 
+print('op_tools version:',op_tools.__version__)
 
 def read_xyz(filename):
     f = open(filename, 'r')
@@ -33,6 +34,18 @@ def f1(j, voronoi_area_list, distance_list):
 
 if __name__ == '__main__':
     [box_length, coord] = read_xyz('sample_data/LJ/bcc.xyz')
+    direct = []
+    op_settings = {'neighbor': [12],
+                   'radius': [1.5],
+                   'Delaunay': ['standard'],
+                   'ave_times': 1,
+                   'm_in_A': [2],
+                   'analysis_type': ['A']}
+    op_data = op_tools.op_analyze(
+        coord, direct, box_length, op_settings, 1)
+    
+    for i1, v1 in op_data.items():
+        print(i1)
     direct = []
     op_settings = {'neighbor': [12],
                    'radius': [1.5],

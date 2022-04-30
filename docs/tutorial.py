@@ -16,7 +16,6 @@ coord_random = [[10*random(),
 op_settings = {
     'neighbor': [6],
     'ave_times': 1,
-    'oi_oj': [0], 'o_factor': [0],
     'b_in_Q': 1, 'l_in_Q': [2, 4, 8],
     'analysis_type': ['Q']}
 direct = []

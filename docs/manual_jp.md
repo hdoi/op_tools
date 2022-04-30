@@ -1,5 +1,5 @@
 ---
-title: "op_tools ver 0.1.5 ユーザーマニュアル"
+title: "op_tools ver 0.2.0 ユーザーマニュアル"
 date: "March 2022"
 author: "土居　英男 (doi.hideo.chemistry@gmail.com)"
 ---

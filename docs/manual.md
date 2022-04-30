@@ -1,7 +1,7 @@
 ---
 title: "User manual for op_tools ver 0.2.0"
 date: "April 2022"
-author: "Hideo Doi"
+author: "Hideo Doi (doi.hideo.chemistry@gmail.com)"
 ---
 
 \newpage

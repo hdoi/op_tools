@@ -22,6 +22,8 @@ from . import neighbor_build
 def param_check(op_settings, idx, init_value):
     if idx not in op_settings:
         op_settings[idx] = init_value
+        print("WARNING! Parameter :", idx , " was not found.")
+        print("Default parameter ", init_value , " was set in ", '"'+idx+'".')
     return op_settings
 
 def elap_time(name, time):
