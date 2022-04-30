@@ -36,9 +36,9 @@ See manual and tutorial.
 ```bash
 $ git clone https://github.com/hdoi/op_tools.git
 $ cd op_tools  
-$ pip3 install -e .  
+$ pip3 install .  
 or 
-$ pip3 install -e . --user  
+$ pip3 install . --user  
 ```
 
 ## Papers

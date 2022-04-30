@@ -10,6 +10,10 @@ uninstall:
 test:
 	python3 ./setup.py test
 
+test_full:
+	python3 ./setup.py test
+	cd tests && python3 manual_check_sample_data_LJ.py
+
 doc:
 	pandoc README.md -o README.rst
 
