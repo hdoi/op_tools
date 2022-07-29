@@ -2,7 +2,7 @@
 
 import time
 from multiprocessing import Pool, Array
-from scipy.spatial import Voronoi, ConvexHull
+from scipy.spatial import Voronoi
 import sys
 import math
 import numpy as np

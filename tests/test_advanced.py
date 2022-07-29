@@ -82,5 +82,6 @@ class TestOrderParam(unittest.TestCase):
         actual = op_tools.misc.vec_to_unit_vec(xyz)
         self.assertEqual(expected, actual)
 
+
 if __name__ == '__main__':
     unittest.main()

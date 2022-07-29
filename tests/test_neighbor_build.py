@@ -21,7 +21,7 @@ class TestNeighborBuild(unittest.TestCase):
             coord, box_length, thresh_dist)
         self.assertEqual((expected == actual), True)
 
-    def test_build_cell(self):
+    def test_build_cell2(self):
         coord = [[0, 0, 0], [3, 3, 3]]
         box_length = [2, 2, 2]
         thresh_dist = 1.0

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import numpy as np
+import op_tools
 import sys
 import os
-sys.path.insert( 0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import op_tools
-import numpy as np
 
-print('op_tools version:',op_tools.__version__)
+print('op_tools version:', op_tools.__version__)
+
 
 def read_xyz(filename):
     f = open(filename, 'r')
@@ -43,7 +44,7 @@ if __name__ == '__main__':
                    'analysis_type': ['A']}
     op_data = op_tools.op_analyze(
         coord, direct, box_length, op_settings, 1)
-    
+
     for i1, v1 in op_data.items():
         print(i1)
     direct = []
@@ -77,9 +78,9 @@ if __name__ == '__main__':
         'radius': [1.5],
         'Delaunay': ['standard'],
         'ave_times': 1,
-        'types_in_C' : ['half'],
-        'modes_in_C' : ['dist'],
-        'analysis_type': ['C'] }
+        'types_in_C': ['half'],
+        'modes_in_C': ['dist'],
+        'analysis_type': ['C']}
 
     op_data = op_tools.op_analyze(
         coord, direct, box_length, op_settings, 1)
@@ -243,13 +244,13 @@ if __name__ == '__main__':
     for i1, v1 in op_data.items():
         print(i1)
 
-    def f1(r):
+    def op_f1(r):
         return r
-    
-    def f2(j, voronoi_area_list, distance_list):
+
+    def op_f2(j, voronoi_area_list, distance_list):
         weight = voronoi_area_list[j] / np.sum(voronoi_area_list)
         return weight
-    
+
     op_settings = {
         'neighbor': [8],
         'radius': [1.5],
@@ -263,10 +264,10 @@ if __name__ == '__main__':
         'n_in_B': [1, 2],
         'phi_in_B': [0],
         # C
-        'types_in_C' : ['half'],
-        'modes_in_C' : ['dist'],
+        'types_in_C': ['half'],
+        'modes_in_C': ['dist'],
         # D
-        'function': [f1],
+        'function': [op_f1],
         # F
         'l_in_F': [1],
         # H
@@ -278,7 +279,7 @@ if __name__ == '__main__':
         'b_in_Q': 1,
         'l_in_Q': [2, 4, 6],
         # Q2 W2
-        'function_in_Q2' : [f2],
+        'function_in_Q2': [op_f2],
         # LQ LW
         # S
         'n_in_S': [2],

@@ -101,6 +101,7 @@ def aha_order_parameter(coord, box_length, setting, neighbor_list, thread_num):
                     try:
                         power.append(g_power[inu])
                     except IndexError as e:
+                        print(e)
                         power.append(0)
                 g_list.append(power)
             h_data_part_nu[name] = g_list
