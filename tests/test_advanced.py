@@ -77,8 +77,8 @@ class TestOrderParam(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_vec_to_unit_vec(self):
-        xyz = [[-2,-2,0]]
-        expected = [[-0.7071067811865475, -0.7071067811865475,0]]
+        xyz = [[-2, -2, 0]]
+        expected = [[-0.7071067811865475, -0.7071067811865475, 0]]
         actual = op_tools.misc.vec_to_unit_vec(xyz)
         self.assertEqual(expected, actual)
 

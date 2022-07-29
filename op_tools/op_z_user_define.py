@@ -14,4 +14,4 @@ def user_define_parameter(coord, direct, box_length, neighbor_list):
         # data_list.append(sum_distance)
         data_list.append(len(neighbor_list[i_i]))
 
-    return {'user_define': data_list }
+    return {'user_define': data_list}

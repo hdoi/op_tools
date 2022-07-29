@@ -30,7 +30,7 @@ def calc_f_wrapper(args):
 
             for i3 in range(i_2 + 1, N):
                 i_k = neighbor_list_ii[i3]
-                x_k = coord_1d[3 * i_k: 3* i_k + 3]
+                x_k = coord_1d[3 * i_k: 3 * i_k + 3]
                 x_ik = misc.calc_delta(x_k, x_i, box_length)
                 di_k = np.linalg.norm(x_ik)
 

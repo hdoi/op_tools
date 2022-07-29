@@ -44,7 +44,7 @@ def calc_order_param(direct, n_leg, ref_vec=None):
 def calc_s_wrapper(args):
     [neighbor_list_ii, i_i, n_legendre] = args
 
-    direct_ii = direct_1d[3 * i_i: 3* i_i + 3]
+    direct_ii = direct_1d[3 * i_i: 3 * i_i + 3]
     # order parameter
     part_direct = []
     for i_j in neighbor_list_ii:

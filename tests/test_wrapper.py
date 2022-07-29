@@ -13,7 +13,7 @@ class TestOrderParam(unittest.TestCase):
         NR_name = 'N1'
         n_list = [[1], [0]]
         nei_area = []
-        op_settings = {'ave_times': 0, 'neighbor': [1], 'n_in_S':[2],  'analysis_type': ['S']}
+        op_settings = {'ave_times': 0, 'neighbor': [1], 'n_in_S': [2],  'analysis_type': ['S']}
         op_datas = {}
         thread_num = 1
 
@@ -45,7 +45,7 @@ class TestOrderParam(unittest.TestCase):
         coord = [[0.0, 0.0, 0.0], [0.5, 0.0, 0.0]]
         direct = [[1, 0, 0], [1, 0, 0]]
         box_length = [2.0, 2.0, 2.0]
-        op_settings = {'ave_times': 0, 'Delaunay':['standard'], 'n_in_S': [2], 'analysis_type': ['S']}
+        op_settings = {'ave_times': 0, 'Delaunay': ['standard'], 'n_in_S': [2], 'analysis_type': ['S']}
         thread_num = 1
 
         expected = {'S_Delaunay_a=0_n=2':  [1.0, 1.0]}

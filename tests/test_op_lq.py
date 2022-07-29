@@ -52,7 +52,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[], [], []]
 
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 0,'b_in_Q': 0, 'l_in_Q': [4, 6]}
+        q_condition = {'ave_times': 0, 'b_in_Q': 0, 'l_in_Q': [4, 6]}
         thread_num = 1
 
         expected = {'l=4_a=0_b=0': [0.0, 0.0, 0.0],

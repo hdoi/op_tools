@@ -14,7 +14,7 @@ def calc_t_wrapper(args):
 
     op_temp = {}
     for n_leg in comb:
-        direct_ii = direct_1d[3 * i_i: 3* i_i + 3]
+        direct_ii = direct_1d[3 * i_i: 3 * i_i + 3]
         x_i = coord_1d[3 * i_i: 3*i_i + 3]
 
         if np.linalg.norm(direct_ii) == 0.0:
@@ -40,7 +40,7 @@ def calc_t_wrapper(args):
             dist_from_plane = misc.plane_point_distance(plane_var, box_length, x_j)
 
             for i_k, dist_layers in enumerate(layer_list):
-                cos_part = math.cos( 2.0 * math.pi * dist_from_plane / dist_layers)
+                cos_part = math.cos(2.0 * math.pi * dist_from_plane / dist_layers)
                 sum_r[i_k] += cos_part * s_part
 
         for i_k, dist_layers in enumerate(layer_list):
@@ -50,7 +50,7 @@ def calc_t_wrapper(args):
                 sum_r[i_k] = sum_r[i_k] / float(len(neighbor_list_ii))
 
             name = misc.naming('t', [0, dist_layers, n_leg])
-            op_temp[name] = round(sum_r[i_k],12)
+            op_temp[name] = round(sum_r[i_k], 12)
 
     return op_temp
 
@@ -81,11 +81,11 @@ def mcmillan_order_parameter(coord, direct, box_length, setting, neighbor_list, 
     comb = [(dist_layers, n_leg)
             for dist_layers in layer_list
             for n_leg in n_legendre]
-    
+
     for a_t in range(a_times):
         for dist_layers, n_leg in comb:
             name = misc.naming('t', [a_t+1, dist_layers, n_leg])
-            name_old = misc.naming( 't', [a_t, dist_layers, n_leg])
+            name_old = misc.naming('t', [a_t, dist_layers, n_leg])
             op_data[name] = misc.v_neighb_ave(neighbor_list, op_data[name_old])
 
     return op_data

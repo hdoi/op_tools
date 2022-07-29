@@ -52,6 +52,7 @@ def calc_q(l_sph, theta, phi):
         q_l[m_sph] = ((-1)**m_sph) * np.conjugate(sph_harm(l_sph, m_sph, theta, phi))
     return q_l
 
+
 def calc_q_weighted(l_sph, theta, phi, weight):
     q_l = [0 for i in range(2 * l_sph + 1)]
     for m_sph in range(l_sph + 1):
@@ -69,5 +70,3 @@ def func_to_value(l_sph, func):
         sum_norm2 += np.real(comp * np.conjugate(comp))
     q_value = math.sqrt(sum_norm2 * (4.0 * math.pi) / (2.0 * l_sph + 1.0))
     return round(q_value, 14)
-
-

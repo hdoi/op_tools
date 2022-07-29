@@ -22,9 +22,10 @@ from . import neighbor_build
 def param_check(op_settings, idx, init_value):
     if idx not in op_settings:
         op_settings[idx] = init_value
-        print("WARNING! Parameter :", idx , " was not found.")
-        print("Default parameter ", init_value , " was set in ", '"'+idx+'".')
+        print("WARNING! Parameter :", idx, " was not found.")
+        print("Default parameter ", init_value, " was set in ", '"'+idx+'".')
     return op_settings
+
 
 def elap_time(name, time):
     print("# ", name, "elap time", round(time, 5), ' (s)')
@@ -144,7 +145,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
     if 'Q' in op_settings['analysis_type'] or 'W' in op_settings['analysis_type']:
         op_settings = param_check(op_settings, 'l_in_Q', [4])
         op_settings = param_check(op_settings, 'b_in_Q', 0)
-        
+
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
                    'b_in_Q': op_settings['b_in_Q'],
@@ -164,7 +165,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
     if 'Q2' in op_settings['analysis_type'] or 'W2' in op_settings['analysis_type']:
         op_settings = param_check(op_settings, 'l_in_Q', [4])
         op_settings = param_check(op_settings, 'b_in_Q', 0)
-        
+
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
                    'b_in_Q': op_settings['b_in_Q'],
@@ -175,7 +176,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
                 coord, box_length, setting, n_list, nei_area, thread_num)
             t_end = time.time()
             elap_time("Spherical Q2", t_end - t_start)
-        
+
         if 'W2' in op_settings['analysis_type']:
             op_temp['W2_' + NR_name] = op_qw2_spherical.w_order_parameter(
                 coord, box_length, setting, n_list, nei_area, thread_num)
@@ -186,7 +187,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
     if 'LQ' in op_settings['analysis_type'] or 'LW' in op_settings['analysis_type']:
         op_settings = param_check(op_settings, 'l_in_Q', [4])
         op_settings = param_check(op_settings, 'b_in_Q', 0)
-        
+
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
                    'b_in_Q': op_settings['b_in_Q'],
@@ -205,7 +206,7 @@ def op_analyze_with_neighbor_list(coord, direct, box_length, NR_name, op_setting
     # Onsager Order parameter S
     if 'S' in op_settings['analysis_type']:
         op_settings = param_check(op_settings, 'n_in_S', [2])
-        
+
         t_start = time.time()
         setting = {'ave_times': op_settings['ave_times'],
                    'n_in_S': op_settings['n_in_S']}

@@ -261,9 +261,9 @@ def naming(mode, arg):
     if mode == 'h':
         [a_t, b_t, ibin] = arg
         name = 'a=' + str(a_t) + '_b=' + str(b_t) + '_bin=' + str(ibin)
-    
+
     if mode == 'i':
-        [a_t ] = arg
+        [a_t] = arg
         name = 'a=' + str(a_t)
 
     if mode == 'q' or mode == 'w':

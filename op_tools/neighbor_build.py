@@ -118,6 +118,7 @@ def check_boundary_condition(x, box_length):
         x = x - math.floor(x / box_length)*box_length
     return x
 
+
 def build_neighbor_list(coord, box_length, condition, thread_num):
     """ building neighbor list
     :param coord: = [[0,0,0],[1,0,0]]

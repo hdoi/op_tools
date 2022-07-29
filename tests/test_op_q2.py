@@ -32,7 +32,7 @@ class TestOp_py(unittest.TestCase):
         neighbor_list = [[1, 2], [0, 2], [0, 1]]
         nei_area = [[1, 1], [1, 1], [1, 1]]
         box_length = [5 for i in range(3)]
-        q_condition = {'ave_times': 1, 'b_in_Q': 1, 'l_in_Q': [4], 'function_in_Q2' : [f1]}
+        q_condition = {'ave_times': 1, 'b_in_Q': 1, 'l_in_Q': [4], 'function_in_Q2': [f1]}
         thread_num = 1
 
         expected = {'l=4_f1=f1_a=0_b=0': [0.82915619758885, 0.54486236794258, 0.54486236794258],
@@ -43,7 +43,6 @@ class TestOp_py(unittest.TestCase):
         actual = op_tools.op_qw2_spherical.spherical_order_parameter(
             coord, box_length, q_condition, neighbor_list, nei_area, thread_num)
         self.assertEqual(expected, actual)
-
 
         # bcc crystal structure
         coord = [

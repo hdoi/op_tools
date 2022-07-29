@@ -20,7 +20,7 @@ def calc_baa_wrapper(args):
             x_j = coord_1d[3 * i_j: 3*i_j + 3]
             for i3 in range(i_2 + 1, len(neighbor_list_ii)):
                 i_k = neighbor_list_ii[i3]
-                x_k = coord_1d[3 * i_k : 3 * i_k + 3]
+                x_k = coord_1d[3 * i_k: 3 * i_k + 3]
 
                 x_i_j = misc.calc_delta(x_j, x_i, box_length)
                 x_ik = misc.calc_delta(x_k, x_i, box_length)

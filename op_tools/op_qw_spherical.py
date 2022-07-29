@@ -40,7 +40,7 @@ def calc_q_body(coord_ii, coord_ij, args):
 def calc_q_wrapper(args):
     [box_length, neighbor_list_ii, i_i, l_list] = args
 
-    coord_ii = coord_1d[3 * i_i: 3* i_i + 3]
+    coord_ii = coord_1d[3 * i_i: 3 * i_i + 3]
 
     coord_ij = []
     direct_ij = []

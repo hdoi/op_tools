@@ -49,7 +49,7 @@ def calc_q_wrapper(args):
     coord_ij = []
     for j in range(len(neighbor_list_ii)):
         i_j = neighbor_list_ii[j]
-        coord_ij.append(coord_1d[3*i_j: 3*i_j+ 3])
+        coord_ij.append(coord_1d[3*i_j: 3*i_j + 3])
 
     q_func_temp = calc_q_body(coord_ii, coord_ij, args)
     return q_func_temp
@@ -84,8 +84,8 @@ def calc_spherical_order_parameter(calc_type, coord, box_length, setting, neighb
             for b_t in range(b_times)]
 
     for l_sph, func, b_t in comb:
-        name = misc.naming( 'q2', [l_sph, func.__name__, 0, b_t+1])
-        name_old = misc.naming( 'q2', [l_sph, func.__name__, 0, b_t])
+        name = misc.naming('q2', [l_sph, func.__name__, 0, b_t+1])
+        name_old = misc.naming('q2', [l_sph, func.__name__, 0, b_t])
         q_func[name] = misc.v_neighb_ave(neighbor_list, q_func[name_old])
 
     # func to value
@@ -96,20 +96,20 @@ def calc_spherical_order_parameter(calc_type, coord, box_length, setting, neighb
         op_data = {}
         for b_t in range(b_times + 1):
             for l_sph, func in comb:
-                name = misc.naming( 'q2', [l_sph, func.__name__, 0, b_t])
+                name = misc.naming('q2', [l_sph, func.__name__, 0, b_t])
                 q_val = []
                 for i_i in range(len(coord)):
                     q_val.append(lib.func_to_value(l_sph, q_func[name][i_i]))
                 op_data[name] = q_val
     elif calc_type == 'W':
-        comb = [(func ) for func in func_list]
+        comb = [(func) for func in func_list]
 
         op_data = {}
         for l_sph in l_list:
             wigner3j = lib.gen_wigner3j(l_sph)
             for b_t in range(b_times + 1):
                 for func in comb:
-                    name = misc.naming( 'w2', [l_sph, func.__name__, 0, b_t])
+                    name = misc.naming('w2', [l_sph, func.__name__, 0, b_t])
                     w_val = []
                     for i_i in range(len(coord)):
                         w_val.append(lib.func_to_value_wigner(
@@ -123,8 +123,8 @@ def calc_spherical_order_parameter(calc_type, coord, box_length, setting, neighb
             for a_t in range(a_times)
             for b_t in range(b_times+1)]
     for l_sph, func, a_t, b_t in comb:
-        name = misc.naming( 'q2', [l_sph, func.__name__, a_t+1, b_t])
-        name_old = misc.naming( 'q2', [l_sph, func.__name__, a_t, b_t])
+        name = misc.naming('q2', [l_sph, func.__name__, a_t+1, b_t])
+        name_old = misc.naming('q2', [l_sph, func.__name__, a_t, b_t])
         op_data[name] = misc.v_neighb_ave(neighbor_list, op_data[name_old])
 
     return op_data

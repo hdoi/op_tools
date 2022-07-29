@@ -8,6 +8,7 @@ import unittest
 class TestNeighborBuild(unittest.TestCase):
 
     """ test method of neighbor build """
+
     def test_build_cell(self):
         coord = [[0, 0, 0], [1, 1, 1]]
         box_length = [2, 2, 2]
